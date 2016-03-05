@@ -43,7 +43,7 @@ public class Splash extends AwesomeSplash {
         configSplash.setTitleSplash("Frenzy Foods");
         configSplash.setTitleTextColor(R.color.Wheat);
         configSplash.setTitleTextSize(30f); //float value
-        configSplash.setAnimTitleDuration(3000);
+        configSplash.setAnimTitleDuration(5000);
         configSplash.setAnimTitleTechnique(Techniques.SlideInUp);
         configSplash.setTitleFont(Constants.DITI_SWEET_FONT); //provide string to your font located in assets/fonts/
     }
