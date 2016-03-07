@@ -12,10 +12,10 @@
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:text="@string/frenzy_foods"
-        android:textColor="@android:color/white"
+        android:textColor="@color/primary_dark"
         android:id="@+id/textView"
         android:textStyle="bold"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:layout_marginLeft="37dp"
         android:layout_above="@+id/display_image"
         android:layout_centerHorizontal="true" />
@@ -29,18 +29,4 @@
         android:contentDescription="@string/image"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
-
-    <!--<TextView-->
-        <!--android:id="@+id/display_name_tv"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:textSize="14sp"-->
-        <!--android:textStyle="bold|italic"-->
-        <!--android:textColor="@android:color/white"-->
-        <!--android:text="@string/display_name"-->
-        <!--android:layout_gravity="center|bottom"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_marginBottom="15dp"-->
-        <!--android:layout_alignLeft="@+id/textView"-->
-        <!--android:layout_alignStart="@+id/textView" />-->
 </RelativeLayout>

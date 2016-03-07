@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="3dp"
+    android:background="@drawable/rounded_hallow"
+    android:paddingBottom="10dp">
+
+
+    <ImageButton
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:id="@+id/menu_overflow"
+        android:padding="10dp"
+        android:background="@android:color/transparent"
+        android:tint="@android:color/darker_gray"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_more_vert"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/image" />
+
+    <RelativeLayout
+        android:id="@+id/ratingBar_holder"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:scaleY="0.8"
+        android:scaleX="0.8"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content">
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ratingBar"
+            android:numStars="5"
+            android:rating="4.5"
+            android:scaleX="0.45"
+            android:scaleY="0.45"
+            android:stepSize="0.5"
+            android:isIndicator="true"
+            style="?attr/radioButtonStyle"
+            android:progressTint="@color/primary_dark"
+            android:layout_centerVertical="true"/>
+
+        <ImageButton
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:id="@+id/review_btn"
+            android:src="@drawable/ic_format_quote"
+            android:background="@drawable/circle"
+            android:padding="5dp"
+            android:scaleType="centerCrop"
+            android:tint="@android:color/white"
+            android:layout_centerVertical="true"
+            android:layout_alignEnd="@+id/ratingBar"
+            android:layout_alignRight="@+id/ratingBar"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="5"
+            android:layout_margin="5dp"
+            android:id="@+id/review_count_tv"
+            android:textColor="@color/primary_dark"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/review_btn" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/menu_image"
+        android:layout_margin="5dp"
+        android:layout_below="@+id/ratingBar_holder"
+        android:src="@drawable/food"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/fried_rice"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/menu_name_tv"
+        android:textStyle="bold"
+        android:layout_below="@+id/ratingBar_holder"
+        android:layout_toEndOf="@+id/menu_image" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="One plate of fried RIce with Meat or fish and salad."
+        android:id="@+id/menu_description_tv"
+        android:layout_below="@+id/menu_name_tv"
+        android:layout_alignStart="@+id/menu_name_tv" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/format_naira"
+        android:id="@+id/amount_tv"
+        android:textColor="@color/primary_text"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/menu_description_tv"
+        android:layout_alignStart="@+id/menu_description_tv" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/qty_count_tv"
+        android:layout_below="@+id/amount_tv"
+        android:gravity="center"
+        android:textColor="@color/primary"
+        android:layout_marginTop="3dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
+
+
+
+</RelativeLayout>

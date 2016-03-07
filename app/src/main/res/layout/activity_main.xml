@@ -24,7 +24,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:layout_scrollFlags="scroll|enterAlways"
+            />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -36,7 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
+        app:layout_behavior="com.dotdex.frenzy.util.FabHideOnScroll"
+        android:src="@drawable/ic_shopping_basket" />
 
 </android.support.design.widget.CoordinatorLayout>
 
@@ -47,7 +50,8 @@
         android:layout_gravity="start"
         android:background="@color/DarkSlateGray"
         app:itemTextColor="@color/AntiqueWhite"
-        app:itemTextAppearance="?android:attr/textAppearanceSmall"
+        app:itemIconTint="@color/Wheat"
+        app:itemTextAppearance="?android:attr/textAppearanceMedium"
         app:headerLayout="@layout/drawer_header"
         app:menu="@menu/nav_menu" />
 </android.support.v4.widget.DrawerLayout>
