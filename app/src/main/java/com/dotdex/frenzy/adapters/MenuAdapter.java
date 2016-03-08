@@ -3,6 +3,7 @@ package com.dotdex.frenzy.adapters;/**
  */
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
 
     public interface MenuItemInteractionListener {
 
-        void moreBtnClicked(int position, Menu menu);
+        void moreBtnClicked(int position, int menuId);
     }
 
     public MenuAdapter(Context context, ArrayList<Menu> menusList)
@@ -56,9 +57,11 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
     public void onBindViewHolder(MenuHolder holder, final int position) {
         //bind the views
         holder.menuName.setText(menuList.get(position).getMenuName());
-        holder.menuImage.setImageDrawable(menuList.get(position).getDrawable());
+        holder.menuImage.setImageDrawable(ContextCompat.getDrawable(getContext(),menuList.get(position).getDrawableId()));
         holder.menuDesc.setText(menuList.get(position).getMenuDescription());
         holder.menuPrice.setText(String.format(getContext().getString(R.string.format_naira), menuList.get(position).getMenuPrice()));
+        holder.menuQtyCount.setText(menuList.get(position).getCurrentPrice());
+
         holder.ratingBar.setRating((float) 2.5);
         holder.commentText.setText("0");
         holder.ratingBar.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +81,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
         holder.moreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.moreBtnClicked(position,menuList.get(position));
+                mListener.moreBtnClicked(position,menuList.get(position).getMenuId());
             }
         });
 
@@ -93,6 +96,12 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
 
     public Context getContext() {
         return context;
+    }
+
+    public void updateMenu(Menu menu, int pos)
+    {
+        menuList.add(pos,menu);
+        notifyItemChanged(pos);
     }
 
     class MenuHolder extends RecyclerView.ViewHolder{

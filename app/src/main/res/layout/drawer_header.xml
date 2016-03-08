@@ -5,6 +5,12 @@
     android:layout_height="200dp"
     android:background="@color/Teal">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/food"
+        android:scaleType="centerCrop"/>
+
 
 
     <TextView
@@ -12,21 +18,12 @@
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:text="@string/frenzy_foods"
-        android:textColor="@color/primary_dark"
+        android:textColor="@color/Wheat"
         android:id="@+id/textView"
         android:textStyle="bold"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="37dp"
-        android:layout_above="@+id/display_image"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp" />
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/common_ic_googleplayservices"
-        android:layout_marginRight="50dp"
-        android:id="@+id/display_image"
-        android:contentDescription="@string/image"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

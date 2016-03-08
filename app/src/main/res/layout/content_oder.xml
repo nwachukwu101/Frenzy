@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="com.dotdex.frenzy.util.FixedScrollingViewBehavior"
+    tools:context=".OrderActivity"
+    tools:showIn="@layout/activity_oder"
+    android:fitsSystemWindows="true">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Fried Rice"
+        android:id="@+id/order_name_tv"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/menu_image"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:id="@+id/line"
+        android:background="@color/LightGrey"
+        android:layout_below="@+id/order_name_tv"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="This is where the food shall still be described a littel for the buyer"
+        android:id="@+id/order_desc_tv"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        android:layout_below="@+id/line"
+        android:layout_alignStart="@+id/order_name_tv"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/basic_price"
+        android:padding="5dp"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/order_desc_tv"
+        android:layout_alignStart="@+id/order_desc_tv"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/format_naira"
+        android:padding="5dp"
+        android:textColor="@color/Black"
+        android:id="@+id/order_basic_amt"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignEnd="@+id/line"
+        android:textStyle="bold" />
+
+
+    <RelativeLayout
+        android:layout_below="@+id/order_basic_amt"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/LightGrey"
+        android:padding="15dp"
+        android:id="@+id/relativeLayout">
+
+
+        <ImageButton
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:id="@+id/minus_btn"
+            android:src="@drawable/ic_remove"
+            android:tint="@android:color/white"
+            android:background="@color/SeaGreen"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/format_quantitiy"
+            android:id="@+id/qty_tv"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textStyle="italic" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:id="@+id/line2"
+            android:layout_marginTop="3dp"
+            android:background="@color/SeaGreen"
+            android:layout_below="@+id/minus_btn"
+            android:layout_centerHorizontal="true" />
+
+        <ImageButton
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:id="@+id/plus_btn"
+            android:src="@drawable/ic_add"
+            android:tint="@android:color/white"
+            android:background="@color/SeaGreen"
+            android:layout_alignBottom="@+id/qty_tv"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/total_price"
+        android:id="@+id/textView2"
+        android:padding="5dp"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_alignStart="@+id/textView4"
+        android:layout_marginTop="28dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/total_price_tv"
+        android:padding="5dp"
+        android:textColor="@color/primary_dark"
+        android:text="@string/format_naira"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignParentEnd="true"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>

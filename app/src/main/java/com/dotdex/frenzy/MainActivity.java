@@ -1,12 +1,13 @@
 package com.dotdex.frenzy;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,17 +16,21 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.dotdex.frenzy.adapters.MenuAdapter;
 import com.dotdex.frenzy.adapters.OverFlowAdapter;
 import com.dotdex.frenzy.model.Menu;
 import com.dotdex.frenzy.model.MenuOption;
+import com.dotdex.frenzy.model.Order;
+import com.dotdex.frenzy.util.MenuBuilder;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuItemInteractionListener {
 
     private static final int GRID_COUNT = 1;
+    private static final int ORDER_REQUEST_CODE = 301;
     private DrawerLayout drawerlayout;
     private NavigationView navigationView;
     private RecyclerView recycler;
@@ -104,38 +109,28 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuI
 
         //start creating the menu
         menusList = new ArrayList<>();
-        menusList.add(new Menu(101, "Fried Rice", "One Plate of fried Rice, well garnished and super delicious....sure you will bite your fingers.",
-                ContextCompat.getDrawable(this, R.drawable.f_rice), 200));
+        menusList.add(MenuBuilder.build(101));
 
-        menusList.add(new Menu(102, "Jeloff Rice ", "One Plate of Jealoff Rice, from the best cook ever, your neighbours will salivate when they percieve the aroma. ",
-                ContextCompat.getDrawable(this, R.drawable.f_rice), 200));
+        menusList.add(MenuBuilder.build(102));
 
-        menusList.add(new Menu(103, "Egusi Soup", "One Plate of Egusi Soup with one Sant. Trust me.. you can always order more santa to your need.",
-                ContextCompat.getDrawable(this, R.drawable.egusi_soup), 200));
+        menusList.add(MenuBuilder.build(103));
 
-        menusList.add(new Menu(104, "Ogbono Soup", "One Plate of Ogbono soup with Santa. You can always order more santa.. i trust you.",
-                ContextCompat.getDrawable(this, R.drawable.ogbono_soup), 200));
+        menusList.add(MenuBuilder.build(104));
 
-        menusList.add(new Menu(105, "Frenzy Moi Moi", "One Measure of moi super delicious and carefully prepared and well packed",
-                ContextCompat.getDrawable(this, R.drawable.moi_moi), 50));
+        menusList.add(MenuBuilder.build(105));
 
-        menusList.add(new Menu(106, "Frenzy Salad", "A measure of Frenzy delicious Salad. You can enjoy your Rice with frenzy salad at a cheap price",
-                ContextCompat.getDrawable(this, R.drawable.f_rice), 50));
+        menusList.add(MenuBuilder.build(106));
 
-        menusList.add(new Menu(107, "Frenzy Fish", "One Slice of fish for your frenzy order. Well fried and prepared for u. Please don't eat without",
-                ContextCompat.getDrawable(this, R.drawable.fish), 50));
+        menusList.add(MenuBuilder.build(107));
 
-        menusList.add(new Menu(108, "Frenzy Meat", "One slice of Frenzy meat to supplement your choice of fish still at affordable price.",
-                ContextCompat.getDrawable(this, R.drawable.beaf), 50));
+        menusList.add(MenuBuilder.build(108));
 
-        menusList.add(new Menu(109, "Frenzy Coca Cola Beverages", "Enjoy your food with coke and don't forget to share with friends. Choose from Fanta, Coke, Sprite,Sweeps...",
-                ContextCompat.getDrawable(this, R.drawable.food), 70));
+        menusList.add(MenuBuilder.build(109));
 
-        menusList.add(new Menu(201, "Frenzy Bottled Water", "Water is important so make your choice of bottled water.",
-                ContextCompat.getDrawable(this, R.drawable.f_rice), 200));
+        menusList.add(MenuBuilder.build(201));
 
 //        menusList.add(new Menu(202, "Egusi Soup", "One Plate of Egusi Soup and Santa without meat. With Bitter Leave",
-//                ContextCompat.getDrawable(this, R.drawable.food), 200));
+//                ContextCompat.getDrawableId(this, R.drawable.food), 200));
 
         adapter = new MenuAdapter(this, menusList);
 
@@ -147,13 +142,13 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuI
     }
 
     @Override
-    public void moreBtnClicked(int position, Menu menu) {
+    public void moreBtnClicked(final int position, final int menuId) {
 
         //show the more menu dialog.
         //here the overflow button is clicked
         OverFlowAdapter adapter = new OverFlowAdapter(this, options);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 //            builder.setTitle("");
 //            builder.setCancelable(false);
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
@@ -161,6 +156,22 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuI
             public void onClick(DialogInterface dialogInterface, int i) {
                 //what will happen here
                 // TODO: 07-Mar-16 make something happen/\.
+                switch (i)
+                {
+                    case 0:
+                        //here why the intet is passed i should parcel the
+                        //order class and pass it along with it
+                        Intent orderIntent = new Intent(MainActivity.this,OrderActivity.class);
+                        Bundle bundle = new Bundle();
+//                        bundle.putParcelable("com.dotdex.frenzy.model.Menu", menu);
+                        bundle.putInt("adaptPosition",position);
+                        bundle.putInt("menuId",menuId);
+                        orderIntent.putExtras(bundle);
+                        startActivityForResult(orderIntent, ORDER_REQUEST_CODE);
+                        break;
+                    case 1:
+                        break;
+                }
 
             }
         });
@@ -168,4 +179,30 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuI
         builder.show();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode==ORDER_REQUEST_CODE && resultCode == Activity.RESULT_OK)
+        {
+            Bundle bundle = data.getExtras();
+            if (bundle!=null)
+            {
+                Toast.makeText(this,"I Got some Results",Toast.LENGTH_LONG).show();
+                Order order = bundle.getParcelable("order");
+                int pos = bundle.getInt("adaptPos");
+                Menu menu = MenuBuilder.build(bundle.getInt("menuId"));
+                if (order!=null) {
+                    menu.setCurrentPrice(String.format(getString(R.string.format_pay),
+                            order.getOrderUnitPrice(),order.getOrderQty(), order.getOrderTotalPrice()));
+                }
+                adapter.updateMenu(menu,pos);
+
+                //animate basket and update its count
+                //also add order to basket
+                // TODO: 07-Mar-16 So much calculation work to be done
+
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

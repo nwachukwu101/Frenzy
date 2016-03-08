@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_margin="3dp"
     android:background="@drawable/rounded_hallow"
-    android:paddingBottom="10dp">
+    android:paddingBottom="5dp">
 
 
     <ImageButton
@@ -61,13 +61,12 @@
             android:layout_centerVertical="true"
             android:layout_alignEnd="@+id/ratingBar"
             android:layout_alignRight="@+id/ratingBar"
-            />
+            android:contentDescription="@string/image" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="5"
             android:layout_margin="5dp"
             android:id="@+id/review_count_tv"
             android:textColor="@color/primary_dark"
@@ -83,7 +82,8 @@
         android:layout_margin="5dp"
         android:layout_below="@+id/ratingBar_holder"
         android:src="@drawable/food"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:contentDescription="@string/image" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -101,7 +101,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="One plate of fried RIce with Meat or fish and salad."
         android:id="@+id/menu_description_tv"
         android:layout_below="@+id/menu_name_tv"
         android:layout_alignStart="@+id/menu_name_tv" />
@@ -126,7 +125,7 @@
         android:layout_below="@+id/amount_tv"
         android:gravity="center"
         android:textColor="@color/primary"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="1dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true" />
 
