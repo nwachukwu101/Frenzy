@@ -5,6 +5,7 @@ package com.dotdex.frenzy.model;/**
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +19,7 @@ public class Basket implements Parcelable {
     public Basket()
     {
 
+        orders = new ArrayList<>();
     }
 
     protected Basket(Parcel in) {
@@ -62,5 +64,44 @@ public class Basket implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(basketId);
         parcel.writeTypedList(orders);
+    }
+
+    public void addOrder(Order order) {
+        this.orders.add(order);
+    }
+
+    public double getBasketTotal()
+    {
+        double p  = 0.0;
+        for (Order o:orders)
+        {
+            p+=o.getOrderTotalPrice();
+        }
+
+        //include vat
+
+
+        return p;
+    }
+
+    public double getSubTotal() {
+        double p = 0.0;
+        for (Order o : orders) {
+            p += o.getOrderTotalPrice();
+        }
+
+        return p;
+    }
+
+    public double getServiceCharge() {
+        return 0.00;
+    }
+
+    public double getDeliveryCharge() {
+        return 0.00;
+    }
+
+    public double getVat() {
+        return 0.00;
     }
 }

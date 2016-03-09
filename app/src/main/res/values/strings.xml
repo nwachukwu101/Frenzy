@@ -27,4 +27,26 @@
     <string name="basic_price">Basic Price</string>
     <string name="total_price">Total Price</string>
     <string name="add_to_basket">Add To Basket</string>
+    <string name="title_activity_check_out">CheckOutActivity</string>
+    <string name="total">Total</string>
+    <string name="delivery_choice">Choose Delivery Type</string>
+
+    <string name="subtotal">Subtotal</string>
+    <string name="s_charg">Service Charge( 10% )</string>
+    <string name="delivery_charge">Delivery Charge</string>
+    <string name="title_activity_deals">DealsActivity</string>
+    <string name="format_order_string"><xliff:g id="qty"><b>%d</b></xliff:g>x<xliff:g id="name"><b>%s</b></xliff:g> @ \u20A6
+        <xliff:g id="u_price"><b>%.2f</b></xliff:g></string>
+    <string name="delivery_address">Choose Delivery Address</string>
+    <string name="payment_type">Choose Payment Type</string>
+    <string name="plaece_order">Place Order</string>
+    <string name="in_20_min">N 50.00</string>
+    <string name="in_20_mins">in 20 min</string>
+    <string name="in_10_mins">Ready in 10 min</string>
+    <string name="free">Free</string>
+    <string name="telephone">Telephone Number</string>
+    <string name="cash_on_delivery">Cash On Delivery.</string>
+    <string name="pos">Point Od Sale (POS)</string>
+    <string name="db_card">Debit Or Credit Card</string>
+    <string name="how_to_pay">How Would You Like to Pay?</string>
 </resources>

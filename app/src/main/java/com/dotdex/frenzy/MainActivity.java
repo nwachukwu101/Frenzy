@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.dotdex.frenzy.adapters.MenuAdapter;
 import com.dotdex.frenzy.adapters.OverFlowAdapter;
+import com.dotdex.frenzy.model.Basket;
 import com.dotdex.frenzy.model.Menu;
 import com.dotdex.frenzy.model.MenuOption;
 import com.dotdex.frenzy.model.Order;
@@ -31,12 +32,14 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuI
 
     private static final int GRID_COUNT = 1;
     private static final int ORDER_REQUEST_CODE = 301;
+    private static final int CHECK_OUT_REQUEST_CODE = 302;
     private DrawerLayout drawerlayout;
     private NavigationView navigationView;
     private RecyclerView recycler;
     private MenuAdapter adapter;
     private ArrayList<Menu> menusList;
     private ArrayList options;
+    private Basket myBasket;
 
 
     @Override
@@ -46,12 +49,27 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuI
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        //instantiate the basket
+        myBasket = new Basket();
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if (!myBasket.getOrders().isEmpty()) {
+                    //here the usr can now forward to check out
+                    Intent cIntent = new Intent(MainActivity.this, CheckOutActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("basket",myBasket);
+                    cIntent.putExtras(bundle);
+                    startActivityForResult(cIntent, CHECK_OUT_REQUEST_CODE);
+                }else {
+                    Snackbar.make(view, "Please add Order(s) to basket before checkout.", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+
+
             }
         });
 
@@ -198,7 +216,10 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuI
 
                 //animate basket and update its count
                 //also add order to basket
-                // TODO: 07-Mar-16 So much calculation work to be done
+                // TODO: 07-Mar-16 So Only Annimation of basket left
+                //add the order to the basket
+                myBasket.addOrder(order);
+
 
             }
         }

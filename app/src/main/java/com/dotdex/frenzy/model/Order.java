@@ -2,8 +2,11 @@ package com.dotdex.frenzy.model;/**
  * Created by DABBY(3pleMinds) on 07-Mar-16.
  */
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.dotdex.frenzy.R;
 
 /**
  * DABBY(3pleMinds) 07-Mar-16 12:51 PM 2016 03
@@ -129,5 +132,16 @@ public class Order implements Parcelable {
 
     public void setmId(int mId) {
         this.mId = mId;
+    }
+
+    public String toFormattedString(Context context) {
+
+        return String.format(context.getString(R.string.format_order_string),getOrderQty(),getOrderName(),getOrderUnitPrice());
+
+    }
+
+    public String totalToString(Context context)
+    {
+        return String.format(context.getString(R.string.format_naira),getOrderTotalPrice());
     }
 }

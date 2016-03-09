@@ -1,0 +1,106 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.dotdex.frenzy.DeliveryTypeFragment"
+    android:paddingTop="30dp">
+
+
+
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home Delivery"
+            android:id="@+id/radioButton"
+            android:checked="true"
+            android:textColor="@color/secondary_text"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="100dp"
+            android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/in_20_min"
+        android:id="@+id/textView9"
+        android:layout_alignBottom="@+id/radioButton"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="24dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/in_20_mins"
+        android:id="@+id/textView11"
+        android:layout_below="@+id/radioButton"
+        android:layout_alignStart="@+id/radioButton"
+        android:layout_marginStart="34dp"
+        android:layout_alignEnd="@+id/radioButton" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pick Up"
+        android:id="@+id/radioButton2"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/secondary_text"
+        android:layout_below="@+id/textView11"
+        android:layout_alignStart="@+id/radioButton"
+        android:layout_marginTop="59dp"
+        android:textStyle="bold"
+        android:checked="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/in_10_mins"
+        android:id="@+id/textView14"
+        android:layout_below="@+id/radioButton2"
+        android:layout_alignStart="@+id/textView11"
+        android:layout_alignEnd="@+id/radioButton" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/free"
+        android:id="@+id/textView15"
+        android:layout_alignBottom="@+id/radioButton2"
+        android:layout_alignEnd="@+id/textView9"
+        android:textStyle="bold" />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:text="@string/delivery_address"
+        android:id="@+id/next_button1"
+        android:background="@color/SeaGreen"
+        android:layout_alignParentBottom="true"
+        android:textAppearance="?android:attr/textAppearanceLargeInverse"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Choose Delivery Type:"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        android:id="@+id/textView24"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/radioButton" />
+
+
+</RelativeLayout>

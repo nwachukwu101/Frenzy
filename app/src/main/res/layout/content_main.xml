@@ -9,9 +9,31 @@
     tools:showIn="@layout/activity_main"
     tools:context=".Splash">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="vertical"
+        android:background="@drawable/menu_bg"
+        android:id="@+id/head">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Frenzy Menu"
+            android:id="@+id/textView7"
+            android:padding="5dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"
+            android:textStyle="bold" />
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/head"
         android:id="@+id/menu_recycler"
         android:paddingBottom="25dp">
 

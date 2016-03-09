@@ -100,8 +100,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
 
     public void updateMenu(Menu menu, int pos)
     {
+        menuList.remove(pos);
         menuList.add(pos,menu);
-        notifyItemChanged(pos);
+        notifyDataSetChanged();
     }
 
     class MenuHolder extends RecyclerView.ViewHolder{

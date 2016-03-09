@@ -1,0 +1,101 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+tools:context="com.dotdex.frenzy.TotalOrderFragment"
+android:paddingTop="30dp">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:text="@string/payment_type"
+        android:id="@+id/next_button2"
+        android:background="@color/SeaGreen"
+        android:layout_alignParentBottom="true"
+        android:textAppearance="?android:attr/textAppearanceLargeInverse"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Delievery Address:"
+        android:id="@+id/textView16"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Your Current Address"
+        android:padding="5dp"
+        android:id="@+id/textView17"
+        android:layout_below="@+id/textView16"
+        android:layout_alignStart="@+id/textView16" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Room 105, Akintola Hall."
+        android:padding="10dp"
+        android:id="@+id/textView18"
+        android:layout_below="@+id/textView17"
+        android:layout_alignStart="@+id/textView17"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Change Address"
+        android:id="@+id/textView19"
+        android:textColor="@color/SeaGreen"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/textView18"
+        android:layout_alignEnd="@+id/textView18"
+        android:textStyle="bold" />
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_email"
+        android:layout_width="wrap_content"
+        android:alpha="0.6"
+        android:textColorHint="@color/secondary_text"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:layout_weight="1"
+        android:layout_marginTop="46dp"
+        android:padding="10dp"
+        android:layout_below="@+id/textView19"
+        android:layout_alignEnd="@+id/textView18"
+        android:layout_alignParentStart="true"
+        android:background="@color/WhiteSmoke">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textEmailAddress"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textSize="14sp"
+            android:layout_marginBottom="5dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/darker_gray"
+            android:gravity="center_vertical"
+            android:text="+2348030520715"
+            android:editable="false"
+            android:hint="@string/telephone"
+            android:id="@+id/email" />
+    </android.support.design.widget.TextInputLayout>
+
+
+</RelativeLayout>
