@@ -53,11 +53,11 @@
         android:id="@+id/radioButton2"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/secondary_text"
-        android:layout_below="@+id/textView11"
-        android:layout_alignStart="@+id/radioButton"
-        android:layout_marginTop="59dp"
         android:textStyle="bold"
-        android:checked="false" />
+        android:checked="false"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/textView11"
+        android:layout_alignStart="@+id/radioButton" />
 
     <TextView
         android:layout_width="wrap_content"

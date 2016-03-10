@@ -1,0 +1,117 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.dipoletech.unnmobile.ContactUsFragment"
+    android:background="@android:color/transparent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/bg"
+        android:layout_gravity="center"
+        >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/unn"
+            android:id="@+id/textView25"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/SeaGreen"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_horizontal"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:weightSum="2"
+            android:id="@+id/linearLayout"
+            android:layout_below="@+id/textView25"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.7"
+                android:text="@string/hall"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/accent"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/sp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.3" />
+        </LinearLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColorHint="@color/Gray"
+            android:layout_below="@+id/linearLayout"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/text_wrap">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:hint="@string/enter_room_no"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/accent"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/room_tv"
+                android:inputType="number|numberDecimal"
+                android:layout_below="@+id/linearLayout"
+                android:layout_alignStart="@+id/text_wrap"
+                android:layout_alignEnd="@+id/text_wrap" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_address"
+            android:id="@+id/add_btn"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/GhostWhite"
+            android:background="@drawable/rounded_btn_bg"
+            android:textStyle="bold"
+            android:layout_marginTop="37dp"
+            android:layout_below="@+id/text_wrap"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+</FrameLayout>

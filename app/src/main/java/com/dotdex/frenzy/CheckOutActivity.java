@@ -13,6 +13,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.dotdex.frenzy.adapters.ViewPagerAdapter;
 import com.dotdex.frenzy.model.Basket;
 import com.dotdex.frenzy.model.Order;
+import com.nineoldandroids.animation.Animator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,8 +120,31 @@ public class CheckOutActivity extends AppCompatActivity implements
                 } else{
                     //slide moving out
 
-                    YoYo.with(Techniques.SlideOutLeft).playOn(p2);
-                    p2.setBackground(null);
+                    YoYo.with(Techniques.SlideOutLeft).withListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            p2.setBackground(null);
+
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+
+                        }
+                    }).playOn(p2);
+                    p1.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.menu_bg));
+
                 }
                 break;
             case 1:
@@ -133,8 +157,30 @@ public class CheckOutActivity extends AppCompatActivity implements
 
                 } else{
                     //slide moving out
-                    YoYo.with(Techniques.SlideOutLeft).playOn(p3);
-                    p3.setBackground(null);
+                    YoYo.with(Techniques.SlideOutLeft).withListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+
+                            p3.setBackground(null);
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+
+                        }
+                    }).playOn(p3);
+                    p2.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.menu_bg));
+
                 }
                 break;
             case 2:
@@ -150,8 +196,29 @@ public class CheckOutActivity extends AppCompatActivity implements
                 }else{
                     //slide moving out
 
-                    YoYo.with(Techniques.SlideOutLeft).playOn(p4);
-                    p4.setBackground(null);
+                    YoYo.with(Techniques.SlideOutLeft).withListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            p4.setBackground(null);
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+
+                        }
+                    }).playOn(p4);
+                    p3.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.menu_bg));
+
                 }
 
                 break;

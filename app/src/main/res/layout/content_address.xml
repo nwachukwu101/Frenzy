@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="com.dotdex.frenzy.util.FixedScrollingViewBehavior"
-    tools:showIn="@layout/activity_main"
-    tools:context=".Splash">
+    tools:context="com.dotdex.frenzy.AddressActivity"
+    tools:showIn="@layout/activity_address"
+    android:background="@android:color/background_light">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Frenzy Menu"
+            android:text="@string/address_list"
             android:id="@+id/textView7"
             android:padding="5dp"
             android:layout_marginTop="5dp"
@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/head"
-        android:id="@+id/menu_recycler"
-        android:paddingBottom="25dp"/>
+        android:id="@+id/address_recycler"
+        android:paddingBottom="25dp" />
 
 </RelativeLayout>

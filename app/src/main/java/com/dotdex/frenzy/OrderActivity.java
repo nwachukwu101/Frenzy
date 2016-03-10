@@ -28,7 +28,7 @@ public class OrderActivity extends AppCompatActivity {
     private Menu menu;
     private int qtyCount;
     private double totalPrice;
-    private int adptPos;
+    private int adaptPos;
     private ImageView oderImage;
 
     @Override
@@ -49,7 +49,7 @@ public class OrderActivity extends AppCompatActivity {
         {
             Bundle bundle  = getIntent().getExtras();
             menu = MenuBuilder.build(bundle.getInt("menuId"));
-            adptPos = bundle.getInt("adaptPosition");
+            adaptPos = bundle.getInt("adaptPosition");
 //            menu = bundle.getParcelable("com.dotdex.frenzy.model.Menu");
         }else {
             menu = null;
@@ -88,7 +88,7 @@ public class OrderActivity extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("order", mOrder);
                 bundle.putInt("menuId",menu.getMenuId());
-                bundle.putInt("adaptPos",adptPos);
+                bundle.putInt("adaptPos", adaptPos);
                 Intent rIntent = new Intent();
                 rIntent.putExtras(bundle);
                 setResult(Activity.RESULT_OK,rIntent);

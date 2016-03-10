@@ -49,4 +49,17 @@
     <string name="pos">Point Od Sale (POS)</string>
     <string name="db_card">Debit Or Credit Card</string>
     <string name="how_to_pay">How Would You Like to Pay?</string>
+    <string name="title_activity_address">Address</string>
+    <string name="title_activity_my_orders">MyOrders</string>
+    <string name="address_list">Your Address List</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="unn">University Of Nigeria Nsukka</string>
+    <string name="hall">Choose Hall</string>
+    <string name="room">Room No:</string>
+    <string name="enter_room_no">Please Enter your Room Number</string>
+    <string name="add_address">Add Address</string>
+
+    <string name="facebook_app_id">244094832591633</string>
 </resources>

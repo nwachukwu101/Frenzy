@@ -16,7 +16,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.dotdex.frenzy.adapters.MenuAdapter;
 import com.dotdex.frenzy.adapters.OverFlowAdapter;
@@ -117,6 +116,18 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuI
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId())
+                {
+                    case R.id.action_address:
+                        startActivity(new Intent(MainActivity.this,AddressActivity.class));
+                        return true;
+                    case R.id.action_deals:
+                        startActivity(new Intent(MainActivity.this,DealsActivity.class));
+                        return true;
+                    case R.id.action_orders:
+                        startActivity(new Intent(MainActivity.this,MyOrdersActivity.class));
+                        return true;
+                }
                 return false;
             }
         });
@@ -128,25 +139,15 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuI
         //start creating the menu
         menusList = new ArrayList<>();
         menusList.add(MenuBuilder.build(101));
-
         menusList.add(MenuBuilder.build(102));
-
         menusList.add(MenuBuilder.build(103));
-
         menusList.add(MenuBuilder.build(104));
-
         menusList.add(MenuBuilder.build(105));
-
         menusList.add(MenuBuilder.build(106));
-
         menusList.add(MenuBuilder.build(107));
-
         menusList.add(MenuBuilder.build(108));
-
         menusList.add(MenuBuilder.build(109));
-
         menusList.add(MenuBuilder.build(201));
-
 //        menusList.add(new Menu(202, "Egusi Soup", "One Plate of Egusi Soup and Santa without meat. With Bitter Leave",
 //                ContextCompat.getDrawableId(this, R.drawable.food), 200));
 
@@ -204,7 +205,6 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuI
             Bundle bundle = data.getExtras();
             if (bundle!=null)
             {
-                Toast.makeText(this,"I Got some Results",Toast.LENGTH_LONG).show();
                 Order order = bundle.getParcelable("order");
                 int pos = bundle.getInt("adaptPos");
                 Menu menu = MenuBuilder.build(bundle.getInt("menuId"));

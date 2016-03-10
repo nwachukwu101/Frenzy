@@ -79,4 +79,12 @@ public class Constants {
             "             118.39,256.72 116.02,248.29 116.00,238.00\n" +
             "             116.00,238.00 116.00,116.00 116.00,116.00\n" +
             "             116.00,116.00 289.00,116.00 289.00,116.00 Z";
+
+        public static final String[] HALLS = {
+
+                "","Akpabio","Akintola","Okeke","Okpara","Isa Kaita",
+                "Aja Nwachukwu","Awolowo","Mary Slessor","Bello","Eyo Ita","Nkriumah"
+        } ;
 }
+
+

@@ -5,18 +5,18 @@
 
     <group android:checkableBehavior="single" android:id="@+id/g1">
         <item
-            android:id="@+id/action_trending"
+            android:id="@+id/action_address"
             android:checked="false"
             android:title="@string/address"
             android:icon="@drawable/ic_account_box"/>
         <item
-            android:id="@+id/action_feeds"
+            android:id="@+id/action_deals"
             android:checked="false"
             android:title="@string/deals"
             android:icon="@drawable/ic_attach_money"/>
 
         <item
-            android:id="@+id/action_inbox"
+            android:id="@+id/action_orders"
             android:checked="false"
             android:title="@string/orders"
             android:icon="@drawable/ic_local_restaurant"/>
@@ -30,7 +30,7 @@
             android:title="@string/rate"
             android:icon="@drawable/ic_star_outline"/>
         <item
-            android:id="@+id/action_feddback"
+            android:id="@+id/action_feedback"
             android:checked="false"
             android:title="@string/feedback"
             android:icon="@drawable/ic_comment"/>
@@ -54,7 +54,7 @@
             android:title="@string/action_about"
             android:icon="@drawable/ic_info_outline" />
         <item
-            android:id="@+id/action_sign_out"
+            android:id="@+id/action_help"
             android:checked="false"
             android:title="@string/help"
             android:icon="@drawable/ic_help"/>
