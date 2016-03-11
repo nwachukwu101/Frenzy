@@ -104,4 +104,13 @@ public class Basket implements Parcelable {
     public double getVat() {
         return 0.00;
     }
+
+    public int getAllCount() {
+        int p = 0;
+        for (Order o : orders) {
+            p += o.getOrderQty();
+        }
+
+        return p;
+    }
 }

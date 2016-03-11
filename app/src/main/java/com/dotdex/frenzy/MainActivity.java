@@ -1,13 +1,15 @@
 package com.dotdex.frenzy;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,12 +19,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.dotdex.frenzy.adapters.MenuAdapter;
-import com.dotdex.frenzy.adapters.OverFlowAdapter;
 import com.dotdex.frenzy.model.Basket;
 import com.dotdex.frenzy.model.Menu;
 import com.dotdex.frenzy.model.MenuOption;
 import com.dotdex.frenzy.model.Order;
+import com.dotdex.frenzy.util.BadgeDrawable;
 import com.dotdex.frenzy.util.MenuBuilder;
 
 import java.util.ArrayList;
@@ -39,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuI
     private ArrayList<Menu> menusList;
     private ArrayList options;
     private Basket myBasket;
+    private FloatingActionButton fab
+            ;
 
 
     @Override
@@ -52,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuI
         //instantiate the basket
         myBasket = new Basket();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,44 +164,51 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuI
         recycler.setLayoutManager(mStaggeredLayoutManager);
 
         recycler.setAdapter(adapter);
+
+        createCartBadge(0);
     }
 
     @Override
-    public void moreBtnClicked(final int position, final int menuId) {
+    public void shareBtnClicked(final int position, final int menuId) {
+//
+//        //show the more menu dialog.
+//        //here the overflow button is clicked
+//        OverFlowAdapter adapter = new OverFlowAdapter(this, options);
+//
+//        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+////            builder.setTitle("");
+////            builder.setCancelable(false);
+//        builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                //what will happen here
+//                // TODO: 07-Mar-16 make something happen/\.
+//                switch (i)
+//                {
+//                    case 0:
+//
+//                        break;
+//                    case 1:
+//                        break;
+//                }
+//
+//            }
+//        });
+//        builder.create();
+//        builder.show();
+    }
 
-        //show the more menu dialog.
-        //here the overflow button is clicked
-        OverFlowAdapter adapter = new OverFlowAdapter(this, options);
+    @Override
+    public void toOrder(int position, int menuId) {
+        //here why the intent is passed i should parcel the
+        //order class and pass it along with it
+        Intent orderIntent = new Intent(MainActivity.this, OrderActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("adaptPosition", position);
+        bundle.putInt("menuId", menuId);
+        orderIntent.putExtras(bundle);
+        startActivityForResult(orderIntent, ORDER_REQUEST_CODE);
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//            builder.setTitle("");
-//            builder.setCancelable(false);
-        builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                //what will happen here
-                // TODO: 07-Mar-16 make something happen/\.
-                switch (i)
-                {
-                    case 0:
-                        //here why the intet is passed i should parcel the
-                        //order class and pass it along with it
-                        Intent orderIntent = new Intent(MainActivity.this,OrderActivity.class);
-                        Bundle bundle = new Bundle();
-//                        bundle.putParcelable("com.dotdex.frenzy.model.Menu", menu);
-                        bundle.putInt("adaptPosition",position);
-                        bundle.putInt("menuId",menuId);
-                        orderIntent.putExtras(bundle);
-                        startActivityForResult(orderIntent, ORDER_REQUEST_CODE);
-                        break;
-                    case 1:
-                        break;
-                }
-
-            }
-        });
-        builder.create();
-        builder.show();
     }
 
     @Override
@@ -215,15 +228,40 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuI
                 adapter.updateMenu(menu,pos);
 
                 //animate basket and update its count
+                YoYo.with(Techniques.Bounce)
+                        .playOn(fab);
                 //also add order to basket
                 // TODO: 07-Mar-16 So Only Annimation of basket left
                 //add the order to the basket
                 myBasket.addOrder(order);
+
+                createCartBadge(myBasket.getAllCount());
 
 
             }
         }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    private void createCartBadge(int paramInt) {
+        if (Build.VERSION.SDK_INT <= 15) {
+            return;
+        }
+        LayerDrawable localLayerDrawable = (LayerDrawable) ContextCompat.getDrawable(this,R.drawable.basket_badge_icon);
+        Drawable cartBadgeDrawable = localLayerDrawable.findDrawableByLayerId(R.id.ic_badge);
+        BadgeDrawable badgeDrawable;
+        if ((cartBadgeDrawable != null)
+                && ((cartBadgeDrawable instanceof BadgeDrawable))
+                && (paramInt < 10)) {
+            badgeDrawable = (BadgeDrawable) cartBadgeDrawable;
+        } else {
+            badgeDrawable = new BadgeDrawable(this);
+        }
+        badgeDrawable.setCount(paramInt);
+        localLayerDrawable.mutate();
+        localLayerDrawable.setDrawableByLayerId(R.id.ic_badge, badgeDrawable);
+        fab.setImageDrawable(localLayerDrawable);
     }
 }

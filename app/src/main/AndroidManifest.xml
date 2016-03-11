@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dotdex.frenzy">
+    package="com.dotdex.frenzy" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -19,8 +19,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-
+        android:theme="@style/AppTheme" >
         <meta-data
             android:name="AA_DB_NAME"
             android:value="Frenzy.db" />
@@ -37,7 +36,7 @@
         <activity
             android:name=".Splash"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.FullScreen">
+            android:theme="@style/AppTheme.FullScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -52,7 +51,7 @@
             android:name=".OrderActivity"
             android:label="@string/title_activity_oder"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dotdex.frenzy.MainActivity" />
@@ -61,7 +60,7 @@
             android:name=".CheckOutActivity"
             android:label="@string/title_activity_check_out"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dotdex.frenzy.MainActivity" />
@@ -70,7 +69,7 @@
             android:name=".DealsActivity"
             android:label="@string/title_activity_deals"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dotdex.frenzy.MainActivity" />
@@ -79,7 +78,7 @@
             android:name=".AddressActivity"
             android:label="@string/title_activity_address"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dotdex.frenzy.MainActivity" />
@@ -88,22 +87,31 @@
             android:name=".MyOrdersActivity"
             android:label="@string/title_activity_my_orders"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dotdex.frenzy.MainActivity" />
         </activity>
-
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <provider
-            android:authorities="com.facebook.app.FacebookContentProvider244094832591633"
             android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider244094832591633"
             android:exported="true" />
+
+        <activity
+            android:name=".OrderDealActivity"
+            android:label="@string/title_activity_order_deal"
+            android:parentActivityName=".CheckOutActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dotdex.frenzy.CheckOutActivity" />
+        </activity>
     </application>
 
 </manifest>

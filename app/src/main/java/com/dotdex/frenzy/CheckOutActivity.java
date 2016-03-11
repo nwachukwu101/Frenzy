@@ -1,5 +1,6 @@
 package com.dotdex.frenzy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -24,6 +25,7 @@ public class CheckOutActivity extends AppCompatActivity implements
         AddressFragement.OnFragmentInteractionListener,
         PaymentFragment.OnFragmentInteractionListener{
 
+    private static final int ORDER_REQUEST_CODE = 306;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
     private Basket myBasket;
@@ -248,9 +250,13 @@ public class CheckOutActivity extends AppCompatActivity implements
 
         //here i shall process the order
         //check if the user is loged in
-        //AND ask them to authenticate
-        // TODO: 09-Mar-16 Much work to be donw here
+        //AND ask them to authenticate\
+        Intent orderIntent = new Intent(this,OrderDealActivity.class);
+        Bundle bundle = new Bundle();
 
+        //add the bundle
+        orderIntent.putExtras(bundle);
+        startActivityForResult(orderIntent, ORDER_REQUEST_CODE);
     }
 
     @Override
@@ -264,5 +270,13 @@ public class CheckOutActivity extends AppCompatActivity implements
 
         viewPager.setCurrentItem(1,true);
 
+    }
+
+
+    //get the resluts
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

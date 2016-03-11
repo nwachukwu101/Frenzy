@@ -85,6 +85,7 @@ public class Constants {
                 "","Akpabio","Akintola","Okeke","Okpara","Isa Kaita",
                 "Aja Nwachukwu","Awolowo","Mary Slessor","Bello","Eyo Ita","Nkriumah"
         } ;
+    public static final String APP_URL = "https://frenzy-unn.firebaseio.com/";
 }
 
 

@@ -20,7 +20,7 @@ public class MenuBuilder {
 
             case 102:
                 return new Menu(102, "Jollof Rice ", "One Plate of Jealoff Rice, from the best cook ever, your neighbours will salivate when they percieve the aroma. ",
-                        R.drawable.f_rice, 200);
+                        R.drawable.jollof, 200);
 
             case 103:
                 return new Menu(103, "Egusi Soup", "One Plate of Egusi Soup with one Sant. Trust me.. you can always order more santa to your need.",
@@ -36,7 +36,7 @@ public class MenuBuilder {
 
             case 106:
                 return new Menu(106, "Frenzy Salad", "A measure of Frenzy delicious Salad. You can enjoy your Rice with frenzy salad at a cheap price",
-                        R.drawable.f_rice, 50);
+                        R.drawable.salad, 50);
 
             case 107:
                 return new Menu(107, "Frenzy Fish", "One Slice of fish for your frenzy order. Well fried and prepared for u. Please don't eat without",
@@ -48,11 +48,11 @@ public class MenuBuilder {
 
             case 109:
                 return new Menu( 109,"Coke Beverages", "Enjoy your food with coke and don't forget to share with friends. Choose from Fanta, Coke, Sprite,Sweeps...",
-                    R.drawable.food, 70);
+                    R.drawable.coke, 70);
 
             case 201:
                 return new Menu(201, "Bottled Water (1 Le)", "Water is important so make your choice of bottled water.",
-                        R.drawable.f_rice, 200);
+                        R.drawable.water, 200);
             default:
                 return null;
 

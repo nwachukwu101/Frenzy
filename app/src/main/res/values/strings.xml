@@ -62,4 +62,7 @@
     <string name="add_address">Add Address</string>
 
     <string name="facebook_app_id">244094832591633</string>
+    <string name="title_activity_order_deal">Place Order</string>
+    <string name="action_logout">Logout</string>
+    <string name="zero">0</string>
 </resources>

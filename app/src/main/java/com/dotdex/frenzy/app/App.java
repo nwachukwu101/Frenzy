@@ -6,6 +6,7 @@ import android.app.Application;
 
 import com.activeandroid.ActiveAndroid;
 import com.facebook.FacebookSdk;
+import com.firebase.client.Firebase;
 
 /**
  * DABBY(3pleMinds) 09-Mar-16 1:39 PM 2016 03
@@ -17,8 +18,11 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         ActiveAndroid.initialize(this);
+
         FacebookSdk.sdkInitialize(getApplicationContext());
         // Initialize the SDK before executing any other operations,
         // especially, if you're using Facebook UI elements.
+
+        Firebase.setAndroidContext(this);
     }
 }

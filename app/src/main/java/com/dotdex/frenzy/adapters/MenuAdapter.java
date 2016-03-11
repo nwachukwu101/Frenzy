@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.dotdex.frenzy.R;
 import com.dotdex.frenzy.model.Menu;
 
@@ -30,7 +32,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
 
     public interface MenuItemInteractionListener {
 
-        void moreBtnClicked(int position, int menuId);
+        void shareBtnClicked(int position, int menuId);
+
+        void toOrder(int position, int menuId);
     }
 
     public MenuAdapter(Context context, ArrayList<Menu> menusList)
@@ -57,10 +61,31 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
     public void onBindViewHolder(MenuHolder holder, final int position) {
         //bind the views
         holder.menuName.setText(menuList.get(position).getMenuName());
-        holder.menuImage.setImageDrawable(ContextCompat.getDrawable(getContext(),menuList.get(position).getDrawableId()));
+        holder.menuName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.toOrder(position, menuList.get(position).getMenuId());
+            }
+        });
+        holder.menuImage.setImageDrawable(ContextCompat.getDrawable(getContext(), menuList.get(position).getDrawableId()));
+        holder.menuImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.toOrder(position, menuList.get(position).getMenuId());
+            }
+        });
         holder.menuDesc.setText(menuList.get(position).getMenuDescription());
+        holder.menuDesc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.toOrder(position, menuList.get(position).getMenuId());
+            }
+        });
         holder.menuPrice.setText(String.format(getContext().getString(R.string.format_naira), menuList.get(position).getMenuPrice()));
+
         holder.menuQtyCount.setText(menuList.get(position).getCurrentPrice());
+        YoYo.with(Techniques.Flash)
+                .playOn(holder.menuQtyCount);
 
         holder.ratingBar.setRating((float) 2.5);
         holder.commentText.setText("0");
@@ -81,7 +106,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
         holder.moreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.moreBtnClicked(position,menuList.get(position).getMenuId());
+                mListener.shareBtnClicked(position, menuList.get(position).getMenuId());
             }
         });
 

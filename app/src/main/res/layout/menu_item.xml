@@ -18,7 +18,7 @@
         android:tint="@android:color/darker_gray"
         android:scaleType="centerCrop"
         android:layout_marginTop="5dp"
-        android:src="@drawable/ic_more_vert"
+        android:src="@drawable/ic_share"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -32,6 +32,7 @@
         android:gravity="center"
         android:scaleY="0.8"
         android:scaleX="0.8"
+        android:padding="5dp"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content">
 
@@ -69,7 +70,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_margin="5dp"
             android:textStyle="bold"
-            android:text="0"
+            android:text="@string/zero"
             android:paddingRight="5dp"
             android:id="@+id/review_count_tv"
             android:textColor="@color/primary_dark"
@@ -123,7 +124,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/qty_count_tv"
         android:layout_below="@+id/amount_tv"
         android:gravity="center"
@@ -132,6 +133,17 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true" />
 
+    <ImageView
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:padding="10dp"
+        android:background="@android:color/transparent"
+        android:tint="@android:color/darker_gray"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_local_restaurant"
+        android:layout_alignStart="@+id/menu_image"
+        android:layout_alignTop="@+id/menu_overflow"
+        android:contentDescription="@string/image" />
 
 
 </RelativeLayout>
