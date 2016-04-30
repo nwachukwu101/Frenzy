@@ -39,6 +39,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:padding="5dp"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
+
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.CollapsingToolbarLayout>

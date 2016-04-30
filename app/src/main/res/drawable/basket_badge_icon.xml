@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/ic_cart_items"
-        android:drawable="@drawable/ic_shopping_basket"
+        android:drawable="@drawable/ico_shoppingbag_teaser"
         android:gravity="center" />
     <item
         android:id="@+id/ic_badge"

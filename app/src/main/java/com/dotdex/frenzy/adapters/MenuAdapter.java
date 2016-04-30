@@ -27,8 +27,15 @@ import java.util.ArrayList;
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
 
     private final Context context;
-    private final ArrayList<Menu> menuList;
+    private  ArrayList<Menu> menuList;
     private final MenuItemInteractionListener mListener;
+
+    public void swapMenu(ArrayList<Menu> menusList) {
+
+        this.menuList= menusList;
+        notifyDataSetChanged();
+
+    }
 
     public interface MenuItemInteractionListener {
 

@@ -25,7 +25,8 @@ public class Splash extends AwesomeSplash {
         //Customize Logo
         configSplash.setLogoSplash(R.mipmap.ic_launcher); //or any other drawable
         configSplash.setAnimLogoSplashDuration(2000); //int ms
-        configSplash.setAnimLogoSplashTechnique(Techniques.Bounce); //choose one form Techniques (ref: https://github.com/daimajia/AndroidViewAnimations)
+        configSplash.setAnimLogoSplashTechnique(Techniques.Bounce);
+         //choose one form Techniques (ref: https://github.com/daimajia/AndroidViewAnimations)
 
 
         //Customize Path

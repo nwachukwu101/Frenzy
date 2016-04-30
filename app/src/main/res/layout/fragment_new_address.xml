@@ -71,7 +71,7 @@
             android:orientation="horizontal"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:textColorHint="@color/Gray"
             android:layout_below="@+id/linearLayout"
             android:layout_alignParentEnd="true"
@@ -95,12 +95,43 @@
 
         </android.support.design.widget.TextInputLayout>
 
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="0dp"
+            android:textColorHint="@color/Gray"
+            android:layout_below="@+id/text_wrap"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/text_wrap1">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:hint="@string/enter_phone"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/accent"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/number_tv"
+                android:inputType="number|phone"
+                android:layout_below="@+id/linearLayout"
+                android:layout_alignStart="@+id/text_wrap"
+                android:layout_alignEnd="@+id/text_wrap" />
+
+        </android.support.design.widget.TextInputLayout>
+
 
 
 
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/add_address"
             android:id="@+id/add_btn"
@@ -108,10 +139,7 @@
             android:textColor="@color/GhostWhite"
             android:background="@drawable/rounded_btn_bg"
             android:textStyle="bold"
-            android:layout_marginTop="37dp"
-            android:layout_below="@+id/text_wrap"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_below="@id/text_wrap1" />
 
     </RelativeLayout>
 </FrameLayout>

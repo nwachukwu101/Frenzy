@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,16 +66,54 @@ public class PaymentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_payment, container, false);
+        final RadioGroup gr2 = (RadioGroup) rootView.findViewById(R.id.radioGroup2);
+
         Button nextBtn = (Button) rootView.findViewById(R.id.next_button3);
+
+        gr2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                onPaymentChoiceMade(radioGroup);
+            }
+        });
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onPlaceOrderBtnPressed();
+
+                if (gr2.getCheckedRadioButtonId()!= -1)
+                {
+                    onPlaceOrderBtnPressed();
+                }else {
+                    Toast.makeText(getContext(),"Please choose a payment type",Toast.LENGTH_LONG).show();
+                }
             }
         });
-
-//        YoYo.with(Techniques.Flash).playOn(rootView);
         return rootView;
+    }
+
+    private void onPaymentChoiceMade(RadioGroup radioGroup) {
+        int id = radioGroup.getCheckedRadioButtonId();
+        switch (id)
+        {
+            case R.id.cash_choice:
+                if (mListener != null) {
+                    mListener.onPaymentChoiceMade(0);
+                }
+                break;
+            case R.id.pos_choice:
+                if (mListener != null) {
+                    mListener.onPaymentChoiceMade(1);
+                }
+                break;
+            case R.id.online_choice:
+                if (mListener != null) {
+                    mListener.onPaymentChoiceMade(2);
+                }
+                break;
+
+        }
+
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -113,5 +153,7 @@ public class PaymentFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onPlaceOrderBtnPressed();
+
+        void onPaymentChoiceMade(int i);
     }
 }

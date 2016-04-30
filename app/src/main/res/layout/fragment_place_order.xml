@@ -1,13 +1,273 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v4.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlaceOrderFragment">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".PlaceOrderFragment"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:padding="10dp">
 
-</FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Processing order ..."
+            android:id="@+id/textView18"
+            android:layout_alignParentTop="true"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/box"
+            android:gravity="center"
+            android:weightSum="5"
+            android:padding="5dp"
+            android:layout_below="@+id/textView18">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_local_restaurant"
+                android:layout_gravity="center_horizontal"
+                app:civ_border_width="4dp"
+                app:civ_border_color="@android:color/darker_gray"
+                android:id="@+id/view1"
+                android:layout_below="@+id/textView18"
+                android:layout_toEndOf="@+id/textView27" />
+
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:background="@color/DarkGray"
+                android:id="@+id/view4" />
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/scooter"
+                android:layout_gravity="center_horizontal"
+                app:civ_border_width="4dp"
+                app:civ_border_color="@android:color/darker_gray"
+                android:id="@+id/view" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:background="@color/DarkGray"
+                android:id="@+id/view5" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_done"
+                android:layout_gravity="center_horizontal"
+                app:civ_border_width="4dp"
+                app:civ_border_color="@android:color/darker_gray"
+                android:id="@+id/view2" />
+
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/DarkGray"
+            android:layout_marginTop="5dp"
+            android:id="@+id/view3"
+            android:layout_below="@+id/box"
+            android:layout_alignParentStart="true" />
+
+
+        <com.github.lzyzsd.circleprogress.DonutProgress
+            android:layout_marginLeft="50dp"
+            android:id="@+id/donut_progress"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:donut_progress="40"
+            android:layout_below="@+id/textView27"
+            android:layout_centerHorizontal="true" />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Your order is being processed"
+            android:layout_marginTop="5dp"
+            android:id="@+id/textView26"
+            android:layout_below="@+id/view3"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="This may take some time"
+            android:id="@+id/textView27"
+            android:layout_below="@+id/textView26"
+            android:layout_centerHorizontal="true" />
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@color/WhiteSmoke"
+            android:layout_marginTop="29dp"
+            android:layout_below="@+id/donut_progress"
+            android:layout_alignParentStart="true"
+            android:id="@+id/linearLayout3">
+
+            <TextView
+                android:layout_width="44dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="10:27 AM"
+                android:textSize="10sp"
+                android:id="@+id/textView39"
+                android:layout_gravity="right"
+                android:textStyle="bold"
+                android:layout_above="@+id/p_contact_tv"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Awaiting confirmation from Frenzy"
+                android:id="@+id/textView28"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Contact: 08030520715"
+                android:id="@+id/p_contact_tv"
+                android:layout_below="@+id/textView28"
+                android:layout_alignStart="@+id/textView28" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@color/WhiteSmoke"
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/linearLayout3"
+            android:layout_alignEnd="@+id/linearLayout3"
+            android:id="@+id/linearLayout4">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Delivery Address"
+                android:id="@+id/textView29"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Akintola Hall, Room 123."
+                android:id="@+id/p_address_tv" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:background="@color/WhiteSmoke"
+            android:layout_marginTop="32dp"
+            android:layout_below="@+id/linearLayout4"
+            android:layout_alignParentEnd="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Your Order"
+                android:id="@+id/textView31"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_marginTop="30dp"
+                android:text="2xFried Rice\n3xJollof rice"
+                android:id="@+id/orders_name" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="N200.00\nN300.00"
+                android:gravity="right"
+                android:id="@+id/orders_amount"
+                android:layout_gravity="right"
+                android:layout_alignTop="@+id/orders_name"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/total"
+                android:id="@+id/textView34"
+                android:layout_marginTop="@dimen/margin_20"
+                android:textStyle="bold"
+                android:layout_below="@+id/textView36"
+                android:layout_alignStart="@+id/textView36" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="N 700.00"
+                android:id="@+id/total_tv"
+                android:layout_alignTop="@+id/textView34"
+                android:layout_alignEnd="@+id/orders_amount"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/basket_break_down_text"
+                android:id="@+id/textView36"
+                android:gravity="left"
+                android:layout_below="@+id/orders_name"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="\nN200.00\nFree\nN 54.00\nN200.00"
+                android:id="@+id/break_down_amount"
+                android:gravity="right"
+                android:layout_alignTop="@+id/textView36"
+                android:layout_alignEnd="@+id/orders_amount" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>

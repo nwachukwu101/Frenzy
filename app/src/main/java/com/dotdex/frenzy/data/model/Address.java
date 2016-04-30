@@ -1,4 +1,4 @@
-package com.dotdex.frenzy.model;/**
+package com.dotdex.frenzy.data.model;/**
  * Created by DABBY(3pleMinds) on 09-Mar-16.
  */
 
@@ -14,7 +14,8 @@ import com.activeandroid.annotation.Table;
 public class Address extends Model {
     @Column(name = "address")
     public String address;
-
+    @Column(name = "phone")
+    public String phone;
     @Column(name = "date")
     public long date;
 

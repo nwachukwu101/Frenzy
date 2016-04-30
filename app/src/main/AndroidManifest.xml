@@ -28,7 +28,9 @@
             android:value="1" />
         <meta-data
             android:name="AA_MODELS"
-            android:value="com.dotdex.frenzy.model.Address" />
+            android:value="com.dotdex.frenzy.data.model.Address,
+            com.dotdex.frenzy.data.model.MyOrder,com.dotdex.frenzy.data.model.MyBasket,
+            " />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -106,11 +108,11 @@
         <activity
             android:name=".OrderDealActivity"
             android:label="@string/title_activity_order_deal"
-            android:parentActivityName=".CheckOutActivity"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dotdex.frenzy.CheckOutActivity" />
+                android:value="com.dotdex.frenzy.MainActivity" />
         </activity>
     </application>
 

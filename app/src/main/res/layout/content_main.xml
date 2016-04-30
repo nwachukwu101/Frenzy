@@ -9,33 +9,39 @@
     tools:showIn="@layout/activity_main"
     tools:context=".Splash">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="vertical"
-        android:background="@drawable/menu_bg"
+        android:background="@android:color/transparent"
         android:id="@+id/head">
-
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/menu_bg"
+            android:scaleType="fitXY"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Frenzy Menu"
             android:id="@+id/textView7"
             android:padding="5dp"
-            android:layout_marginTop="5dp"
             android:gravity="center"
             android:textColor="@android:color/white"
             android:layout_gravity="center"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/head"
+        android:background="@android:color/transparent"
         android:id="@+id/menu_recycler"
-        android:paddingBottom="25dp"/>
+        android:paddingBottom="25dp"
+        android:layout_below="@+id/head" />
 
 </RelativeLayout>

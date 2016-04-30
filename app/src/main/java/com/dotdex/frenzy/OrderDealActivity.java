@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,11 +13,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.dotdex.frenzy.model.Basket;
 import com.dotdex.frenzy.util.Constants;
 import com.facebook.login.LoginManager;
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 
 import java.util.HashMap;
@@ -29,6 +32,7 @@ public class OrderDealActivity extends AppCompatActivity implements
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final String TAG_1 = "placeOrder_frag";
     private static final String TAG_2 = "auth_frag";
+    private boolean orderPosted;
 
     /* *************************************
      *              GENERAL                *
@@ -44,7 +48,8 @@ public class OrderDealActivity extends AppCompatActivity implements
 
     /* Listener for Firebase session changes */
     private Firebase.AuthStateListener mAuthStateListener;
-
+    private GoogleApiClient mGoogleApiClient;
+    private Basket myBasket;
 
 
     @Override
@@ -56,6 +61,9 @@ public class OrderDealActivity extends AppCompatActivity implements
         setSupportActionBar(toolbar);
         //show the back icon
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //init basket
+        myBasket = null;
 //
 //        try {
 //            PackageInfo info = getPackageManager().getPackageInfo(
@@ -74,6 +82,16 @@ public class OrderDealActivity extends AppCompatActivity implements
 //
 //        }
 
+        if (this.getIntent()!=null)
+        {
+            Bundle bundle = getIntent().getExtras();
+            myBasket = bundle.getParcelable("basket");
+        }
+
+          /* Setup the Google API object to allow Google+ logins */
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Plus.API)
+                .build();
 
         /* Setup the progress dialog that is displayed later when authenticating with Firebase */
         mAuthProgressDialog = new ProgressDialog(this);
@@ -85,7 +103,6 @@ public class OrderDealActivity extends AppCompatActivity implements
          /* Create the Firebase ref that is used for all authentication with Firebase */
         mFirebaseRef = new Firebase(Constants.APP_URL);
 
-
         mAuthStateListener = new Firebase.AuthStateListener() {
             @Override
             public void onAuthStateChanged(AuthData authData) {
@@ -96,13 +113,17 @@ public class OrderDealActivity extends AppCompatActivity implements
          * user and hide hide any login buttons */
         mFirebaseRef.addAuthStateListener(mAuthStateListener);
 
+
+        //get the basket from the calling activity
+
+
     }
 
 
     private void showPlaceOrderFragment() {
-        getSupportActionBar().setTitle("Place Order.::");
+        getSupportActionBar().setTitle("Place MyOrder.::");
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        PlaceOrderFragment fragment = new PlaceOrderFragment();
+        PlaceOrderFragment fragment = PlaceOrderFragment.newInstance(myBasket,"");
         transaction.replace(R.id.fragment, fragment, TAG_1);
         transaction.commitAllowingStateLoss();
 
@@ -118,6 +139,8 @@ public class OrderDealActivity extends AppCompatActivity implements
 
     }
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         /* If a user is currently authenticated, display a logout menu */
@@ -132,9 +155,15 @@ public class OrderDealActivity extends AppCompatActivity implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_logout) {
-            logout();
-            return true;
+        switch (id)
+        {
+            case R.id.action_logout:
+                logout();
+                return true;
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -145,8 +174,6 @@ public class OrderDealActivity extends AppCompatActivity implements
     private void setAuthenticatedUser(AuthData authData) {
         if (authData != null) {
             /* Hide all the login buttons */
-            showPlaceOrderFragment();
-
             /* show a provider specific status text */
             String name = null;
             if (authData.getProvider().equals("facebook")
@@ -161,7 +188,14 @@ public class OrderDealActivity extends AppCompatActivity implements
             }
             if (name != null) {
                 Toast.makeText(this, "Logged in as:" + name + " (" + authData.getProvider() + ")",Toast.LENGTH_LONG).show();
+
+                myBasket.setUserName(authData.getProviderData().get("displayName").toString());
+//            myBasket.setUserEmail(authData.getProviderData().get("email").toString());
+//            myBasket.setProfileImageUrl(authData.getProviderData().get("profileImageUrl").toString());
+
             }
+            postOrder();
+
         } else {
             /* No authenticated user show all the login buttons */
             showLoginFragment();
@@ -170,6 +204,36 @@ public class OrderDealActivity extends AppCompatActivity implements
 
         /* invalidate options menu to hide/show the logout button */
         supportInvalidateOptionsMenu();
+    }
+
+    private void postOrder() {
+
+        mAuthProgressDialog.setMessage("Processing Order...");
+        mAuthProgressDialog.show();
+        if (!isOrderPosted()) {
+            //insert the basket
+            Firebase ref = mFirebaseRef.child("baskets");
+            String id = ref.push().getKey();
+            Firebase nRef = ref.child(id);
+            myBasket.setBasketId(id);
+            nRef.setValue(myBasket, new Firebase.CompletionListener() {
+                @Override
+                public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                    if (firebaseError != null) {
+                    } else {
+
+                        mAuthProgressDialog.hide();
+                        Toast.makeText(OrderDealActivity.this, "Posted", Toast.LENGTH_LONG).show();
+                        setOrderPosted(true);
+                        showPlaceOrderFragment();
+//                    MyBasket myLocalBasket = MyBasket.fromBasket(myBasket);
+//                    myLocalBasket.save();
+
+                    }
+                }
+            });
+        }
+
     }
 
     @Override
@@ -206,6 +270,14 @@ public class OrderDealActivity extends AppCompatActivity implements
                 mFirebaseRef.authWithOAuthToken(provider, options.get("oauth_token"), new AuthResultHandler(provider));
             }
         }
+    }
+
+    public boolean isOrderPosted() {
+        return orderPosted;
+    }
+
+    public void setOrderPosted(boolean orderPosted) {
+        this.orderPosted = orderPosted;
     }
 
 
@@ -251,6 +323,7 @@ public class OrderDealActivity extends AppCompatActivity implements
         super.onDestroy();
         // if changing configurations, stop tracking firebase session.
         mFirebaseRef.removeAuthStateListener(mAuthStateListener);
+//        setResult();
     }
 
 
@@ -268,9 +341,9 @@ public class OrderDealActivity extends AppCompatActivity implements
                 LoginManager.getInstance().logOut();
             } else if (this.mAuthData.getProvider().equals("google")) {
                 /* Logout from Google+ */
-                if (AuthFragment.mGoogleApiClient.isConnected()) {
-                    Plus.AccountApi.clearDefaultAccount(AuthFragment.mGoogleApiClient);
-                    AuthFragment.mGoogleApiClient.disconnect();
+                if (mGoogleApiClient.isConnected()) {
+                    Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
+                    mGoogleApiClient.disconnect();
 
                 }
             }
@@ -278,4 +351,7 @@ public class OrderDealActivity extends AppCompatActivity implements
             setAuthenticatedUser(null);
         }
     }
+
+
+
 }

@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -18,16 +21,13 @@ import android.widget.Button;
  * create an instance of this fragment.
  */
 public class DeliveryTypeFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1 = "param";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Bundle mParam;
 
     private OnFragmentInteractionListener mListener;
+    private double amount;
 
     public DeliveryTypeFragment() {
         // Required empty public constructor
@@ -37,16 +37,14 @@ public class DeliveryTypeFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param param Parameter 1.
      * @return A new instance of fragment DeliveryTypeFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DeliveryTypeFragment newInstance(String param1, String param2) {
+    public static DeliveryTypeFragment newInstance(Bundle param) {
         DeliveryTypeFragment fragment = new DeliveryTypeFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putBundle(ARG_PARAM1, param);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,8 +53,8 @@ public class DeliveryTypeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam = getArguments().getBundle(ARG_PARAM1);
+            amount = mParam.getDouble("d_charge");
         }
     }
 
@@ -66,16 +64,44 @@ public class DeliveryTypeFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_delivery_type, container, false);
 
-
+        TextView amountTv = (TextView) rootView.findViewById(R.id.d_charge_tv);
+        amountTv.setText(String.format(getString(R.string.format_naira), amount));
         Button nextBtn = (Button) rootView.findViewById(R.id.next_button1);
+        final RadioGroup gr1 = (RadioGroup) rootView.findViewById(R.id.radioGroup1);
+        gr1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                onDeliveryChoiceMade(radioGroup);
+
+            }
+        });
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onDeliveryChoiceBtnPressed();
+                //check if the radio button is clicked
+                if (gr1.getCheckedRadioButtonId()!=-1) {
+                    onDeliveryChoiceBtnPressed();
+                }else {
+                Toast.makeText(getContext(), "Please Choose delivery type", Toast.LENGTH_LONG).show();
+            }
+
             }
         });
-//        YoYo.with(Techniques.FadeInRight).playOn(rootView);
         return rootView;
+    }
+
+    private void onDeliveryChoiceMade(RadioGroup radioGroup) {
+        int choice;
+        if (radioGroup.getId()==R.id.home_choice)
+        {
+            choice = 0;
+        }else
+        {
+            choice = 1;
+        }
+        if (mListener != null) {
+            mListener.onDeliveryAddressChoiceMade(choice);
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -115,5 +141,7 @@ public class DeliveryTypeFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onDeliveryAddressChoiceBtnPressed();
+
+        void onDeliveryAddressChoiceMade(int choice);
     }
 }

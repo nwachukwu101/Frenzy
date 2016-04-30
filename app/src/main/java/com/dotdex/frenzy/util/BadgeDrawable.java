@@ -28,7 +28,7 @@ public class BadgeDrawable extends Drawable {
         this.mBadgePaint.setAntiAlias(true);
         this.mBadgePaint.setStyle(Paint.Style.FILL);
         this.mTextPaint = new Paint();
-        this.mTextPaint.setColor(paramContext.getResources().getColor(R.color.accent));
+        this.mTextPaint.setColor(paramContext.getResources().getColor(R.color.white));
         this.mTextPaint.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD_ITALIC));
         this.mTextPaint.setTextSize(this.mTextSize);
         this.mTextPaint.setAntiAlias(true);
@@ -49,8 +49,8 @@ public class BadgeDrawable extends Drawable {
         } else {
             circleRadius = Math.min(width, height) / 4.0f + 4.5F;
         }
-        float circleX = width - circleRadius - 4.0f;
-        float circleY = height - circleRadius - 10.0f;
+        float circleX = width/2.0f ;
+        float circleY = height/1.25f-4.5F;
 
         paramCanvas.drawCircle(circleX, circleY, circleRadius, this.mBadgePaint);
         this.mTextPaint.getTextBounds(this.mCount, 0, this.mCount.length(),

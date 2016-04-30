@@ -2,6 +2,7 @@ package com.dotdex.frenzy;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
@@ -43,9 +44,7 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuI
     private ArrayList<Menu> menusList;
     private ArrayList options;
     private Basket myBasket;
-    private FloatingActionButton fab
-            ;
-
+    private FloatingActionButton checkoutBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,21 +55,22 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuI
 
 
         //instantiate the basket
-        myBasket = new Basket();
+        myBasket = new Basket("");
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        checkoutBtn= (FloatingActionButton) findViewById(R.id.fab);
+        checkoutBtn.setBackgroundColor(Color.TRANSPARENT);
+        checkoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!myBasket.getOrders().isEmpty()) {
                     //here the usr can now forward to check out
                     Intent cIntent = new Intent(MainActivity.this, CheckOutActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putParcelable("basket",myBasket);
+                    bundle.putParcelable("basket", myBasket);
                     cIntent.putExtras(bundle);
                     startActivityForResult(cIntent, CHECK_OUT_REQUEST_CODE);
-                }else {
-                    Snackbar.make(view, "Please add Order(s) to basket before checkout.", Snackbar.LENGTH_LONG)
+                } else {
+                    Snackbar.make(view, "Please add MyOrder(s) to basket before checkout.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
 
@@ -143,17 +143,7 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuI
         recycler = (RecyclerView) findViewById(R.id.menu_recycler);
 
         //start creating the menu
-        menusList = new ArrayList<>();
-        menusList.add(MenuBuilder.build(101));
-        menusList.add(MenuBuilder.build(102));
-        menusList.add(MenuBuilder.build(103));
-        menusList.add(MenuBuilder.build(104));
-        menusList.add(MenuBuilder.build(105));
-        menusList.add(MenuBuilder.build(106));
-        menusList.add(MenuBuilder.build(107));
-        menusList.add(MenuBuilder.build(108));
-        menusList.add(MenuBuilder.build(109));
-        menusList.add(MenuBuilder.build(201));
+        menusList =buildAllMenu();
 //        menusList.add(new Menu(202, "Egusi Soup", "One Plate of Egusi Soup and Santa without meat. With Bitter Leave",
 //                ContextCompat.getDrawableId(this, R.drawable.food), 200));
 
@@ -166,6 +156,22 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuI
         recycler.setAdapter(adapter);
 
         createCartBadge(0);
+    }
+
+    private ArrayList<Menu> buildAllMenu() {
+        ArrayList arrayList = new ArrayList<>();
+        arrayList.add(MenuBuilder.build(101));
+        arrayList.add(MenuBuilder.build(102));
+        arrayList.add(MenuBuilder.build(103));
+        arrayList.add(MenuBuilder.build(104));
+        arrayList.add(MenuBuilder.build(105));
+        arrayList.add(MenuBuilder.build(106));
+        arrayList.add(MenuBuilder.build(107));
+        arrayList.add(MenuBuilder.build(108));
+        arrayList.add(MenuBuilder.build(109));
+        arrayList.add(MenuBuilder.build(201));
+
+        return arrayList;
     }
 
     @Override
@@ -225,23 +231,39 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuI
                     menu.setCurrentPrice(String.format(getString(R.string.format_pay),
                             order.getOrderUnitPrice(),order.getOrderQty(), order.getOrderTotalPrice()));
                 }
-                adapter.updateMenu(menu,pos);
+                adapter.updateMenu(menu, pos);
 
                 //animate basket and update its count
                 YoYo.with(Techniques.Bounce)
-                        .playOn(fab);
+                        .playOn(checkoutBtn);
                 //also add order to basket
-                // TODO: 07-Mar-16 So Only Annimation of basket left
                 //add the order to the basket
                 myBasket.addOrder(order);
-
                 createCartBadge(myBasket.getAllCount());
 
 
             }
         }
+        if (resultCode==Activity.RESULT_CANCELED && requestCode ==CHECK_OUT_REQUEST_CODE)
+        {
+            //user wishes to edit the order
+            //so do not rest
+
+        }
+
+        if (resultCode == Activity.RESULT_OK && requestCode == CHECK_OUT_REQUEST_CODE) {
+            emptyBasket();
+
+        }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void emptyBasket() {
+        myBasket.empty();
+        menusList = buildAllMenu();
+        adapter.swapMenu(menusList);
+        createCartBadge(0);
     }
 
 
@@ -262,6 +284,9 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.MenuI
         badgeDrawable.setCount(paramInt);
         localLayerDrawable.mutate();
         localLayerDrawable.setDrawableByLayerId(R.id.ic_badge, badgeDrawable);
-        fab.setImageDrawable(localLayerDrawable);
+        checkoutBtn.setImageDrawable(localLayerDrawable);
     }
+
+
+
 }

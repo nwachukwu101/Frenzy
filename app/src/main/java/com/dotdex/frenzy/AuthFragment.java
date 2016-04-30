@@ -16,10 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.dotdex.frenzy.util.Constants;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
-import com.facebook.FacebookSdk;
 import com.facebook.login.widget.LoginButton;
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
@@ -30,10 +30,13 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.plus.Plus;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -135,6 +138,13 @@ public class AuthFragment extends Fragment implements
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        /* *******************
+        INIT THW FIREBASE REFS
+        ********************* */
+        mFirebaseRef = new Firebase(Constants.APP_URL);
+        //get the Auth.
+        mAuthData = mFirebaseRef.getAuth();
     }
 
     @Override
@@ -142,15 +152,12 @@ public class AuthFragment extends Fragment implements
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_auth, container, false);
-        FacebookSdk.sdkInitialize(getContext());
 
-
-                /* Setup the progress dialog that is displayed later when authenticating with Firebase */
+        /* Setup the progress dialog that is displayed later when authenticating with Firebase */
         mAuthProgressDialog = new ProgressDialog(getContext());
         mAuthProgressDialog.setTitle("Loading");
-        mAuthProgressDialog.setMessage("Obtaining TOken From Google...");
+        mAuthProgressDialog.setMessage("Obtaining Token From Google...");
         mAuthProgressDialog.setCancelable(false);
-//        mAuthProgressDialog.show();
 
 
         // Other app specific specialization
@@ -159,7 +166,11 @@ public class AuthFragment extends Fragment implements
          ***************************************/
         /* Load the Facebook login button and set up the tracker to monitor access token changes */
         mFacebookLoginButton = (LoginButton) rootView.findViewById(R.id.fb_login_button);
-        mFacebookLoginButton.setReadPermissions("user_friends");
+        List<String> permissions = new ArrayList<>();
+        permissions.add("user_friends");
+        permissions.add("email");
+        permissions.add("public_profile");
+        mFacebookLoginButton.setReadPermissions(permissions);
         // If using in a fragment
         mFacebookLoginButton.setFragment(this);
         mFacebookCallbackManager = CallbackManager.Factory.create();
@@ -177,10 +188,12 @@ public class AuthFragment extends Fragment implements
         /* Load the Google login button */
          /* Setup the Google API object to allow Google+ logins */
         mGoogleApiClient = new GoogleApiClient.Builder(getContext())
+                .enableAutoManage(getActivity(),this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN)
+                .addScope(new Scope("email"))
                 .build();
 
         mGoogleLoginButton = (SignInButton) rootView.findViewById(R.id.go_login_button);
@@ -251,6 +264,7 @@ public class AuthFragment extends Fragment implements
 
     private void getGoogleOAuthTokenAndLogin() {
         mAuthProgressDialog.show();
+        Log.d("TOKEN","Geting token");
         /* Get OAuth token in Background */
         AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
             String errorMessage = null;

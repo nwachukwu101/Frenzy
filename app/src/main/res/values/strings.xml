@@ -17,7 +17,8 @@
     <string name="closeDrawer">Close Drawer</string>
     <string name="fried_rice">Fried Rice</string>
     <string name="format_naira"><b>\u20A6 </b><xliff:g id="end"><b>%.2f</b></xliff:g></string>
-    <string name="format_pay"><b><xliff:g id="price"><b>%.2f</b></xliff:g>x<xliff:g id="times"><b>%d</b></xliff:g> - \u20A6  <xliff:g id="total"><b>%.2f</b></xliff:g></b></string>
+    <string name="format_pay"><b><xliff:g id="price"><b>%.2f</b></xliff:g>x<xliff:g id="times"><b>%d</b>
+    </xliff:g> - \u20A6  <xliff:g id="total"><b>%.2f</b></xliff:g></b></string>
     <string name="order">Order</string>
     <string name="order_sub">Order this menu from frenzy and have it delivered to you</string>
     <string name="share">Share</string>
@@ -32,9 +33,9 @@
     <string name="delivery_choice">Choose Delivery Type</string>
 
     <string name="subtotal">Subtotal</string>
-    <string name="s_charg">Service Charge( 10% )</string>
+    <string name="s_charg">Service Charge( 0% )</string>
     <string name="delivery_charge">Delivery Charge</string>
-    <string name="title_activity_deals">DealsActivity</string>
+    <string name="title_activity_deals">Deals.::</string>
     <string name="format_order_string"><xliff:g id="qty"><b>%d</b></xliff:g>x<xliff:g id="name"><b>%s</b></xliff:g> @ \u20A6
         <xliff:g id="u_price"><b>%.2f</b></xliff:g></string>
     <string name="delivery_address">Choose Delivery Address</string>
@@ -46,8 +47,8 @@
     <string name="free">Free</string>
     <string name="telephone">Telephone Number</string>
     <string name="cash_on_delivery">Cash On Delivery.</string>
-    <string name="pos">Point Od Sale (POS)</string>
-    <string name="db_card">Debit Or Credit Card</string>
+    <string name="pos">Point Of Sale (POS)</string>
+    <string name="db_card">Online (Debit/Credit Card)</string>
     <string name="how_to_pay">How Would You Like to Pay?</string>
     <string name="title_activity_address">Address</string>
     <string name="title_activity_my_orders">MyOrders</string>
@@ -65,4 +66,16 @@
     <string name="title_activity_order_deal">Place Order</string>
     <string name="action_logout">Logout</string>
     <string name="zero">0</string>
+    <string name="select">Select</string>
+    <string name="select_sub">Use this address</string>
+    <string name="delete">Delete</string>
+    <string name="del_sub">Remove this address from list</string>
+    <string name="edit">Modify</string>
+    <string name="edit_sub">Modify this address</string>
+    <string name="d_address">Delivery Address:</string>
+    <string name="basket_break_down_text" translatable="false"><b>Break Down:</b>\nSubtotal\nService fee(0%)\nVAT(0%)\nDelivery Fee</string>
+    <string name="format_contact">Contact:<xliff:g id="name"><b>%s</b></xliff:g></string>
+    <string name="vat">VAT (0%)</string>
+    <string name="enter_phone">Please enter phone number</string>
+    <string name="choose_delivery_type">Choose Delivery Type:</string>
 </resources>

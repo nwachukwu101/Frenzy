@@ -83,7 +83,7 @@ public class Constants {
         public static final String[] HALLS = {
 
                 "","Akpabio","Akintola","Okeke","Okpara","Isa Kaita",
-                "Aja Nwachukwu","Awolowo","Mary Slessor","Bello","Eyo Ita","Nkriumah"
+                "Aja Nwachukwu","Awolowo","Mary Slessor","Bello","Eyo Ita","Nkurumah"
         } ;
     public static final String APP_URL = "https://frenzy-unn.firebaseio.com/";
 }

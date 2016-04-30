@@ -21,74 +21,47 @@
         android:textStyle="bold"
         android:typeface="normal" />
 
-    <RadioButton
-        android:layout_width="wrap_content"
+    <RadioGroup
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/cash_on_delivery"
-        android:id="@+id/radioButton3"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/secondary_text"
         android:layout_below="@+id/textView20"
-        android:layout_alignStart="@+id/textView20"
-        android:textStyle="bold"
-        android:checked="false" />
+        android:layout_alignParentStart="true"
+        android:layout_margin="20dp"
+        android:id="@+id/radioGroup2">
 
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pos"
-        android:id="@+id/radioButton4"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/secondary_text"
-        android:layout_below="@+id/radioButton3"
-        android:layout_alignStart="@+id/radioButton3"
-        android:layout_marginTop="30dp"
-        android:checked="false"
-        android:textStyle="bold" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cash_on_delivery"
+            android:id="@+id/cash_choice"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/secondary_text"
+            android:textStyle="bold"
+            android:checked="false" />
 
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/db_card"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/secondary_text"
-        android:id="@+id/radioButton5"
-        android:layout_below="@+id/radioButton4"
-        android:layout_alignStart="@+id/radioButton4"
-        android:layout_marginTop="30dp"
-        android:checked="false"
-        android:textStyle="bold" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pos"
+            android:id="@+id/pos_choice"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/secondary_text"
+            android:layout_marginTop="30dp"
+            android:checked="false"
+            android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Pay Cash as soon as you get your order"
-        android:id="@+id/textView21"
-        android:layout_below="@+id/radioButton3"
-        android:layout_alignStart="@+id/radioButton3"
-        android:layout_marginStart="35dp"
-        android:layout_alignParentEnd="true" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/db_card"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/secondary_text"
+            android:id="@+id/online_choice"
+            android:layout_marginTop="30dp"
+            android:checked="false"
+            android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Pay to the vendor using POS and your C/D card"
-        android:id="@+id/textView22"
-        android:layout_alignStart="@+id/textView21"
-        android:layout_below="@+id/radioButton4"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Pay online using your card"
-        android:id="@+id/textView23"
-        android:layout_below="@+id/radioButton5"
-        android:layout_alignStart="@+id/textView22"
-        android:layout_alignParentEnd="true" />
+    </RadioGroup>
 
     <Button
         android:layout_width="match_parent"
@@ -97,9 +70,10 @@
         android:text="@string/plaece_order"
         android:id="@+id/next_button3"
         android:background="@color/SeaGreen"
-        android:layout_alignParentBottom="true"
         android:textAppearance="?android:attr/textAppearanceLargeInverse"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

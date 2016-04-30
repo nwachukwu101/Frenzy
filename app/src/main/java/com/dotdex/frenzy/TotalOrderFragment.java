@@ -68,11 +68,8 @@ public class TotalOrderFragment extends Fragment {
         if (getArguments() != null) {
             myBundle = getArguments().getBundle(ARG_PARAM1);
             //extract all from teh bundle
-
             myBasket  = myBundle.getParcelable("basket");
-
-
-            total = myBasket.getBasketTotal();
+            total = myBasket.getTotal();
             subTotal = myBasket.getSubTotal();
             sCharge = myBasket.getServiceCharge();
             dCharge = myBasket.getDeliveryCharge();

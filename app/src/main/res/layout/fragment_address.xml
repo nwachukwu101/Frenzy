@@ -21,7 +21,7 @@ android:paddingTop="30dp">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Delievery Address:"
+        android:text="@string/d_address"
         android:id="@+id/textView16"
         android:layout_margin="10dp"
         android:padding="5dp"
@@ -34,6 +34,7 @@ android:paddingTop="30dp">
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Your Current Address"
+        android:textColor="@color/secondary_text"
         android:padding="5dp"
         android:id="@+id/textView17"
         android:layout_below="@+id/textView16"
@@ -42,13 +43,13 @@ android:paddingTop="30dp">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Room 105, Akintola Hall."
         android:padding="10dp"
-        android:id="@+id/textView18"
+        tools:text="Your address goes here."
+        android:id="@+id/address_holder"
         android:layout_below="@+id/textView17"
         android:layout_alignStart="@+id/textView17"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:autoLink="all" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -60,8 +61,8 @@ android:paddingTop="30dp">
         android:layout_marginTop="5dp"
         android:padding="5dp"
         android:layout_marginRight="10dp"
-        android:layout_below="@+id/textView18"
-        android:layout_alignEnd="@+id/textView18"
+        android:layout_below="@+id/address_holder"
+        android:layout_alignEnd="@+id/address_holder"
         android:textStyle="bold" />
 
 
@@ -76,7 +77,7 @@ android:paddingTop="30dp">
         android:layout_marginTop="46dp"
         android:padding="10dp"
         android:layout_below="@+id/to_address_tv"
-        android:layout_alignEnd="@+id/textView18"
+        android:layout_alignEnd="@+id/address_holder"
         android:layout_alignParentStart="true"
         android:background="@color/WhiteSmoke">
 
@@ -91,10 +92,10 @@ android:paddingTop="30dp">
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/primary_text"
             android:gravity="center_vertical"
-            android:text="+2348030520715"
+            tools:text="+2348030520715"
             android:editable="false"
             android:hint="@string/telephone"
-            android:id="@+id/email"
+            android:id="@+id/phone"
             android:textIsSelectable="true" />
     </android.support.design.widget.TextInputLayout>
 

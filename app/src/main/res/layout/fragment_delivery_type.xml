@@ -7,77 +7,54 @@
     android:paddingTop="30dp">
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/choose_delivery_type"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        android:id="@+id/textView24"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/home_choice" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView24"
+        android:layout_alignParentStart="true"
+        android:id="@+id/radioGroup1">
 
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Home Delivery"
-            android:id="@+id/radioButton"
-            android:checked="true"
+            android:hint="skldsmklmdklfmlkdmlf"
+            android:id="@+id/home_choice"
+            android:checked="false"
             android:textColor="@color/secondary_text"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_margin="20dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="100dp"
             android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/in_20_min"
-        android:id="@+id/textView9"
-        android:layout_alignBottom="@+id/radioButton"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="24dp"
-        android:textStyle="bold" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pick Up"
+            android:id="@+id/pick_choice"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/secondary_text"
+            android:textStyle="bold"
+            android:checked="false"
+            android:layout_margin="20dp"
+            android:layout_below="@+id/textView11"
+            android:layout_alignStart="@+id/home_choice" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/in_20_mins"
-        android:id="@+id/textView11"
-        android:layout_below="@+id/radioButton"
-        android:layout_alignStart="@+id/radioButton"
-        android:layout_marginStart="34dp"
-        android:layout_alignEnd="@+id/radioButton" />
 
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pick Up"
-        android:id="@+id/radioButton2"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/secondary_text"
-        android:textStyle="bold"
-        android:checked="false"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/textView11"
-        android:layout_alignStart="@+id/radioButton" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/in_10_mins"
-        android:id="@+id/textView14"
-        android:layout_below="@+id/radioButton2"
-        android:layout_alignStart="@+id/textView11"
-        android:layout_alignEnd="@+id/radioButton" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/free"
-        android:id="@+id/textView15"
-        android:layout_alignBottom="@+id/radioButton2"
-        android:layout_alignEnd="@+id/textView9"
-        android:textStyle="bold" />
+    </RadioGroup>
 
 
     <Button
@@ -94,13 +71,27 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Choose Delivery Type:"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/free"
+        android:id="@+id/textView15"
         android:textStyle="bold"
-        android:layout_margin="10dp"
-        android:id="@+id/textView24"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/radioButton" />
+        android:layout_gravity="right"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="23dp"
+        android:layout_alignBottom="@+id/radioGroup1"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tools:text="N 200.00"
+        android:id="@+id/d_charge_tv"
+        android:textStyle="bold"
+        android:layout_gravity="right"
+        android:layout_marginTop="29dp"
+        android:layout_alignTop="@+id/radioGroup1"
+        android:layout_alignEnd="@+id/textView15" />
 
 
 </RelativeLayout>

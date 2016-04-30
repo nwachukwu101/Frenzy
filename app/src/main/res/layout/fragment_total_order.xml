@@ -19,18 +19,6 @@
         android:textColor="@color/SeaGreen"
         android:textStyle="bold|italic" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        app:fabSize="mini"
-        android:src="@drawable/ic_mode_edit"
-        android:layout_margin="10dp"
-        android:tint="@android:color/white"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
-
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="180dp"
@@ -45,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         app:fabSize="mini"
-        android:src="@drawable/ic_add"
+        android:src="@drawable/ic_mode_edit"
         android:tint="@android:color/white"
         android:layout_margin="10dp"
         android:layout_alignBottom="@+id/line"
@@ -128,7 +116,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="VAT (5%)"
+        android:text="@string/vat"
         android:id="@+id/textView13"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/textView10"
@@ -140,7 +128,6 @@
         android:layout_height="60dp"
         android:layout_gravity="bottom"
         android:text="@string/delivery_choice"
-        android:textStyle="bold"
         android:id="@+id/next_button"
         android:background="@color/SeaGreen"
         android:layout_alignParentBottom="true"

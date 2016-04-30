@@ -14,7 +14,7 @@ import com.dotdex.frenzy.R;
  **/
 public class Order implements Parcelable {
     private int orderId;
-    private  int mId;
+    private  int menuId;
     private String orderName;
     private String orderDescription;
     private double orderUnitPrice;
@@ -28,7 +28,7 @@ public class Order implements Parcelable {
 
     protected Order(Parcel in) {
         orderId = in.readInt();
-        mId = in.readInt();
+        menuId = in.readInt();
         orderName = in.readString();
         orderDescription = in.readString();
         orderUnitPrice = in.readDouble();
@@ -56,7 +56,7 @@ public class Order implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(orderId);
-        parcel.writeInt(mId);
+        parcel.writeInt(menuId);
         parcel.writeString(orderName);
         parcel.writeString(orderDescription);
         parcel.writeDouble(orderUnitPrice);
@@ -115,7 +115,7 @@ public class Order implements Parcelable {
     public static Order fromMenu(Menu menu,int qty,double totalPrice)
     {
         Order order = new Order();
-        order.setmId(menu.getMenuId());
+        order.setMenuId(menu.getMenuId());
         order.setOrderName(menu.getMenuName());
         order.setOrderDescription(menu.getMenuDescription());
         order.setOrderUnitPrice(menu.getMenuPrice());
@@ -126,12 +126,12 @@ public class Order implements Parcelable {
         return order;
     }
 
-    public int getmId() {
-        return mId;
+    public int getMenuId() {
+        return menuId;
     }
 
-    public void setmId(int mId) {
-        this.mId = mId;
+    public void setMenuId(int menuId) {
+        this.menuId = menuId;
     }
 
     public String toFormattedString(Context context) {

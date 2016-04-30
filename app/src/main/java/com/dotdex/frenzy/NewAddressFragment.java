@@ -11,8 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dotdex.frenzy.adapters.HallAdapter;
 
@@ -83,8 +84,10 @@ public class NewAddressFragment extends DialogFragment {
         spinner1.setAdapter(new HallAdapter(getContext()));
 
         final TextInputLayout inputLayout = (TextInputLayout) rootView.findViewById(R.id.text_wrap);
+        final TextInputLayout inputLayout1 = (TextInputLayout) rootView.findViewById(R.id.text_wrap1);
 
-        final TextView roomTv = (TextView) rootView.findViewById(R.id.room_tv);
+        final EditText roomTv = (EditText) rootView.findViewById(R.id.room_tv);
+        final EditText phone = (EditText) rootView.findViewById(R.id.number_tv);
 
 
         Button addBtn = (Button) rootView.findViewById(R.id.add_btn);
@@ -92,14 +95,28 @@ public class NewAddressFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 String r = roomTv.getText().toString().trim();
-                if (r.length() == 0 |r.length()<3) {
-                    inputLayout.setError("You room number must be 3 digits");
+                String p = phone.getText().toString().trim();
+                String hall = spinner1.getSelectedItem().toString();
+                if (!hall.isEmpty()) {
+                    if (r.length() == 0 | r.length() < 3) {
+                        inputLayout.setError("You room number must be 3 digits");
 
-                } else {
-                    String address = spinner1.getSelectedItem().toString() + " Hall, Room " +r;
-                    onAddBtnPressed(address);
-                    dismiss();
+                    } else if (p.length() == 0 | p.length() < 3) {
 
+                        inputLayout1.setError("You must enter a phone number");
+                    } else if(p.length()>11){
+
+                        inputLayout1.setError("You phone number is too long");
+                    }else {
+
+                        String address = hall + " Hall, Room " + r;
+                        String phoneText = phone.getText().toString().trim();
+                        onAddBtnPressed(address, phoneText);
+                        dismiss();
+
+                    }
+                }else {
+                    Toast.makeText(getContext(),"Please choose a hall from the oprions",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -110,10 +127,9 @@ public class NewAddressFragment extends DialogFragment {
         return rootView;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onAddBtnPressed(String address) {
+    public void onAddBtnPressed(String address, String phoneText) {
         if (mListener != null) {
-            mListener.onAddBtnPressed(address);
+            mListener.onAddBtnPressed(address,phoneText);
         }
     }
 
@@ -146,6 +162,6 @@ public class NewAddressFragment extends DialogFragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onAddBtnPressed(String s);
+        void onAddBtnPressed(String s, String phone);
     }
 }

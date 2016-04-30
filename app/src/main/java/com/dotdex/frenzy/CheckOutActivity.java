@@ -1,5 +1,6 @@
 package com.dotdex.frenzy;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -22,7 +24,7 @@ import java.util.List;
 public class CheckOutActivity extends AppCompatActivity implements
         TotalOrderFragment.OnFragmentInteractionListener,
         DeliveryTypeFragment.OnFragmentInteractionListener,
-        AddressFragement.OnFragmentInteractionListener,
+        AddressFragment.OnFragmentInteractionListener,
         PaymentFragment.OnFragmentInteractionListener{
 
     private static final int ORDER_REQUEST_CODE = 306;
@@ -31,7 +33,7 @@ public class CheckOutActivity extends AppCompatActivity implements
     private Basket myBasket;
     private List<Order> orders;
     private TextView totalTv;
-    private boolean orderTotalled,deliveryTypeChoosen,deliveryAddressChoosen,paymentTypechoosen,orderPlaced;
+    private boolean orderTotalled, deliveryTypeChosen,deliveryAddressChosen, paymentTypeChosen,orderPlaced;
     private View p1;
     private View p2;
     private View p3;
@@ -77,11 +79,14 @@ public class CheckOutActivity extends AppCompatActivity implements
         {
             Bundle bundle = getIntent().getExtras();
             myBasket = bundle.getParcelable("basket");
-            totalTv.setText(String.format(getString(R.string.format_naira), myBasket.getBasketTotal()));
-
+            myBasket.calculateBasket();
+            setOrderTotalled(true);
+            totalTv.setText(String.format(getString(R.string.format_naira), myBasket.getTotal()));
+            Bundle b = new Bundle();
+            b.putDouble("d_charge",myBasket.getDeliveryCharge());
             adapter.addFragment(TotalOrderFragment.newInstance(bundle), "Total");
-            adapter.addFragment(new DeliveryTypeFragment(), "Total");
-            adapter.addFragment(new AddressFragement(), "Total");
+            adapter.addFragment(DeliveryTypeFragment.newInstance(b), "Total");
+            adapter.addFragment(new AddressFragment(), "Total");
             adapter.addFragment(new PaymentFragment(), "Total");
 
         }
@@ -151,7 +156,8 @@ public class CheckOutActivity extends AppCompatActivity implements
                 break;
             case 1:
                 //second position
-                if (adapterInitPos == 0)//slide moving in
+                if (adapterInitPos == 0)
+                //slide moving in
                 {
                     p1.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.sea_bg));
                     p2.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.menu_bg));
@@ -168,7 +174,31 @@ public class CheckOutActivity extends AppCompatActivity implements
                         @Override
                         public void onAnimationEnd(Animator animation) {
 
-                            p3.setBackground(null);
+                            p4.setBackground(null);
+                            //after now play on p3
+                            YoYo.with(Techniques.SlideOutLeft).withListener(new Animator.AnimatorListener() {
+                                @Override
+                                public void onAnimationStart(Animator animation) {
+
+                                }
+
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+
+                                    p3.setBackground(null);
+                                    //after now play on p3
+                                }
+
+                                @Override
+                                public void onAnimationCancel(Animator animation) {
+
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animator animation) {
+
+                                }
+                            }).playOn(p3);
                         }
 
                         @Override
@@ -180,7 +210,8 @@ public class CheckOutActivity extends AppCompatActivity implements
                         public void onAnimationRepeat(Animator animation) {
 
                         }
-                    }).playOn(p3);
+                    }).playOn(p4);
+                    //replace the current bg
                     p2.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.menu_bg));
 
                 }
@@ -246,17 +277,76 @@ public class CheckOutActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onAddressChosen(String add, String p) {
+        myBasket.setAddress(add);
+        myBasket.setContact(p);
+        setDeliveryAddressChosen(true);
+    }
+
+    @Override
     public void onPlaceOrderBtnPressed() {
 
         //here i shall process the order
-        //check if the user is loged in
+        //check if the user is logged in
         //AND ask them to authenticate\
-        Intent orderIntent = new Intent(this,OrderDealActivity.class);
-        Bundle bundle = new Bundle();
 
-        //add the bundle
-        orderIntent.putExtras(bundle);
-        startActivityForResult(orderIntent, ORDER_REQUEST_CODE);
+        if (isOrderTotalled())
+        {
+            //check if the user has chosen a delivery type
+            if (isDeliveryTypeChosen())
+            {
+                //check if the user has chosen a delivery address
+                if(deliveryAddressChosen)
+                {
+                    //check if they have also chosen a payment type
+                    if(isPaymentTypeChosen())
+                    {
+                        //send the order to the order deal activity
+                        Intent orderIntent = new Intent(this, OrderDealActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelable("basket", myBasket);
+                        //add the bundle
+                        orderIntent.putExtras(bundle);
+                        startActivity(orderIntent);
+                        setResult(Activity.RESULT_OK,null);
+                        finish();
+
+                    }else {
+                        //tell them to choose a payment type
+                        Toast.makeText(this,"Please choose a payment type.",Toast.LENGTH_LONG).show();
+                        viewPager.setCurrentItem(3,true);
+                    }
+
+                }else {
+                    //tell them to choose a delivery address
+                    Toast.makeText(this, "Please choose delivery address.", Toast.LENGTH_LONG).show();
+                    viewPager.setCurrentItem(2, true);
+
+                }
+
+            }else {
+                //tell them to choose a delivery type
+                Toast.makeText(this, "Please choose delivery type.", Toast.LENGTH_LONG).show();
+                viewPager.setCurrentItem(1, true);
+            }
+
+        }
+
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setResult(Activity.RESULT_CANCELED, null);
+        finish();
+    }
+
+    @Override
+    public void onPaymentChoiceMade(int i) {
+        myBasket.setPaymentType(i);
+        setPaymentTypeChosen(true);
     }
 
     @Override
@@ -266,9 +356,15 @@ public class CheckOutActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onDeliveryAddressChoiceMade(int choice) {
+        myBasket.setDeliveryType(choice);
+        setDeliveryTypeChosen(true);
+    }
+
+    @Override
     public void onDeliveryTypeBtnPressed() {
 
-        viewPager.setCurrentItem(1,true);
+        viewPager.setCurrentItem(1, true);
 
     }
 
@@ -278,5 +374,37 @@ public class CheckOutActivity extends AppCompatActivity implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public boolean isOrderTotalled() {
+        return orderTotalled;
+    }
+
+    public void setOrderTotalled(boolean orderTotalled) {
+        this.orderTotalled = orderTotalled;
+    }
+
+    public boolean isDeliveryTypeChosen() {
+        return deliveryTypeChosen;
+    }
+
+    public void setDeliveryTypeChosen(boolean deliveryTypeChosen) {
+        this.deliveryTypeChosen = deliveryTypeChosen;
+    }
+
+    public boolean isDeliveryAddressChosen() {
+        return deliveryAddressChosen;
+    }
+
+    public void setDeliveryAddressChosen(boolean deliveryAddressChosen) {
+        this.deliveryAddressChosen = deliveryAddressChosen;
+    }
+
+    public boolean isPaymentTypeChosen() {
+        return paymentTypeChosen;
+    }
+
+    public void setPaymentTypeChosen(boolean paymentTypeChosen) {
+        this.paymentTypeChosen = paymentTypeChosen;
     }
 }
